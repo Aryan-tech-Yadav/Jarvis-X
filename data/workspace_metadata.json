@@ -1,0 +1,29 @@
+{
+  "build_a_simple_hello_world_python_script": {
+    "name": "build_a_simple_hello_world_python_script",
+    "path": "workspace\\build_a_simple_hello_world_python_script",
+    "goal": "Build a simple hello world python script",
+    "status": "created",
+    "success": false,
+    "overall_score": 0.0,
+    "artifacts": []
+  },
+  "build_a_simple_todo_app_with_a_todo_list": {
+    "name": "build_a_simple_todo_app_with_a_todo_list",
+    "path": "workspace\\build_a_simple_todo_app_with_a_todo_list",
+    "goal": "Build a simple todo app with a todo list",
+    "status": "created",
+    "success": false,
+    "overall_score": 0.0,
+    "artifacts": []
+  },
+  "hello_world": {
+    "name": "hello_world",
+    "path": "workspace\\hello_world",
+    "goal": "hello world",
+    "status": "created",
+    "success": false,
+    "overall_score": 0.0,
+    "artifacts": []
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "template_id": "react_portfolio",
+  "name": "React Portfolio Template",
+  "description": "Clean React portfolio with Vite and modern CSS",
+  "project_type": "web_app",
+  "tech_stack": {
+    "runtime": "javascript",
+    "frontend": "react",
+    "frameworks": [
+      "react",
+      "vite"
+    ]
+  },
+  "files": {
+    "src/App.jsx": "import { useState } from 'react'\n\nfunction App() {\n  const [projects] = useState([\n    { title: \"Project 1\", desc: \"Description\" },\n    { title: \"Project 2\", desc: \"Description\" },\n  ])\n\n  return (\n    <div className=\"min-h-screen bg-gray-50\">\n      <header className=\"bg-white shadow\">\n        <div className=\"max-w-7xl mx-auto py-6 px-4\">\n          <h1 className=\"text-3xl font-bold text-gray-900\">My Portfolio</h1>\n        </div>\n      </header>\n      <main className=\"max-w-7xl mx-auto py-6 px-4\">\n        <section className=\"mb-8\">\n          <h2 className=\"text-2xl font-semibold mb-4\">Projects</h2>\n          <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n            {projects.map((p, i) => (\n              <div key={i} className=\"bg-white p-6 rounded-lg shadow\">\n                <h3 className=\"text-xl font-medium\">{p.title}</h3>\n                <p className=\"text-gray-600 mt-2\">{p.desc}</p>\n              </div>\n            ))}\n          </div>\n        </section>\n      </main>\n    </div>\n  )\n}\n\nexport default App\n",
+    "src/main.jsx": "import React from 'react'\nimport ReactDOM from 'react-dom/client'\nimport App from './App.jsx'\nimport './index.css'\n\nReactDOM.createRoot(document.getElementById('root')).render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n)\n",
+    "src/index.css": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\nbody {\n  margin: 0;\n  font-family: system-ui, -apple-system, sans-serif;\n}\n",
+    "package.json": "{\"name\": \"portfolio\", \"private\": true, \"version\": \"0.0.0\", \"type\": \"module\", \"scripts\": {\"dev\": \"vite\", \"build\": \"vite build\", \"preview\": \"vite preview\"}, \"dependencies\": {\"react\": \"^18.2.0\", \"react-dom\": \"^18.2.0\"}, \"devDependencies\": {\"@vitejs/plugin-react\": \"^4.0.0\", \"vite\": \"^4.4.0\", \"tailwindcss\": \"^3.3.0\", \"postcss\": \"^8.4.0\", \"autoprefixer\": \"^10.4.0\"}}",
+    "vite.config.js": "import { defineConfig } from 'vite'\nimport react from '@vitejs/plugin-react'\n\nexport default defineConfig({ plugins: [react()] })",
+    "tailwind.config.js": "/** @type {import('tailwindcss').Config} */\nexport default { content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'], theme: { extend: {} }, plugins: [], }",
+    "postcss.config.js": "export default { plugins: { tailwindcss: {}, autoprefixer: {}, }, }",
+    "index.html": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /><title>Portfolio</title></head><body><div id=\"root\"></div><script type=\"module\" src=\"/src/main.jsx\"></script></body></html>",
+    "README.md": "# React Portfolio\n\nRun: `npm install && npm run dev`\n"
+  },
+  "config": {
+    "entry_point": "src/main.jsx",
+    "port": 5173
+  },
+  "tags": [
+    "portfolio",
+    "react",
+    "vite",
+    "frontend"
+  ],
+  "quality_score": 96.0,
+  "usage_count": 0
+}

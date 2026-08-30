@@ -1,0 +1,158 @@
+[
+  {
+    "project_name": "build_a_simple_hello_world_python_script",
+    "goal": "Build a simple hello world python script",
+    "architecture": {
+      "folders": [
+        "backend",
+        "tests",
+        "docs",
+        "docker"
+      ],
+      "architecture": {
+        "pattern": "layered monolith",
+        "layers": [
+          "presentation",
+          "application",
+          "domain",
+          "infrastructure"
+        ],
+        "description": "Default layered monolith for rapid delivery."
+      },
+      "technology": {}
+    },
+    "errors": [],
+    "fixes": [],
+    "runtime_notes": [],
+    "llm_prompts": [],
+    "benchmark": {
+      "project_name": "build_a_simple_hello_world_python_script",
+      "overall_score": 56.0,
+      "grade": "F",
+      "passed": false,
+      "dimensions": {
+        "requirement": {
+          "score": 50.0,
+          "weight": 10
+        },
+        "planning": {
+          "score": 40.0,
+          "weight": 15
+        },
+        "architecture": {
+          "score": 100.0,
+          "weight": 15
+        },
+        "backend": {
+          "score": 100.0,
+          "weight": 20
+        },
+        "testing": {
+          "score": 0.0,
+          "weight": 15
+        },
+        "security": {
+          "score": 0.0,
+          "weight": 10
+        },
+        "performance": {
+          "score": 0.0,
+          "weight": 5
+        },
+        "documentation": {
+          "score": 100.0,
+          "weight": 10
+        }
+      },
+      "suggestions": [
+        "Code meets senior engineering QA standards."
+      ],
+      "gate_reasons": []
+    },
+    "success": true,
+    "success_rate": 0.56,
+    "duration_seconds": 0.0,
+    "tokens_used": 0,
+    "artifacts": [
+      "workspace\\build_a_simple_hello_world_python_script"
+    ]
+  },
+  {
+    "project_name": "hello_world",
+    "goal": "hello world",
+    "architecture": {
+      "folders": [
+        "backend",
+        "tests",
+        "docs",
+        "docker"
+      ],
+      "architecture": {
+        "pattern": "layered monolith",
+        "layers": [
+          "presentation",
+          "application",
+          "domain",
+          "infrastructure"
+        ],
+        "description": "Default layered monolith for rapid delivery."
+      },
+      "technology": {}
+    },
+    "errors": [],
+    "fixes": [],
+    "runtime_notes": [],
+    "llm_prompts": [],
+    "benchmark": {
+      "project_name": "hello_world",
+      "overall_score": 53.83,
+      "grade": "F",
+      "passed": false,
+      "dimensions": {
+        "requirement": {
+          "score": 50.0,
+          "weight": 10
+        },
+        "planning": {
+          "score": 40.0,
+          "weight": 15
+        },
+        "architecture": {
+          "score": 100.0,
+          "weight": 15
+        },
+        "backend": {
+          "score": 94.0,
+          "weight": 20
+        },
+        "testing": {
+          "score": 0.0,
+          "weight": 15
+        },
+        "security": {
+          "score": 0.0,
+          "weight": 10
+        },
+        "performance": {
+          "score": 0.0,
+          "weight": 5
+        },
+        "documentation": {
+          "score": 90.33,
+          "weight": 10
+        }
+      },
+      "suggestions": [
+        "Extract 3 duplicated logic blocks into shared utility functions."
+      ],
+      "gate_reasons": []
+    },
+    "success": true,
+    "success_rate": 0.54,
+    "duration_seconds": 0.0,
+    "tokens_used": 0,
+    "artifacts": [
+      "workspace\\hello_world"
+    ]
+  }
+]

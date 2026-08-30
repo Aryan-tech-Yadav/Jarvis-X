@@ -1,0 +1,30 @@
+{
+  "checkpoint_id": "ckpt-8aa8a536b4f2",
+  "session_id": "session-4fccbad6f0cb",
+  "project_name": "build",
+  "goal": "Build Test Project",
+  "phase": "repair",
+  "status": "pending",
+  "completed_tasks": [
+    "requirement",
+    "architect",
+    "backend",
+    "database",
+    "frontend",
+    "tester",
+    "repair"
+  ],
+  "pending_tasks": [
+    "ceo",
+    "documentation",
+    "deployment",
+    "reviewer"
+  ],
+  "artifacts": [],
+  "errors": [],
+  "logs": [],
+  "metrics": {},
+  "created_at": "2026-08-26T20:45:10.860400+00:00",
+  "sequence": 77,
+  "metadata": {}
+}

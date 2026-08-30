@@ -1,0 +1,1249 @@
+[
+  {
+    "project_id": "ad9e0465-37e1-4051-a624-2d709b03c00b",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:36.695936+00:00"
+  },
+  {
+    "project_id": "4fc0f30c-a594-484c-b979-963b7a5bdb32",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:36.822355+00:00"
+  },
+  {
+    "project_id": "3f2fd7e9-3b37-4004-8784-2f03f4f480ec",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:36.971324+00:00"
+  },
+  {
+    "project_id": "1ff04c24-b3bc-4d44-97d5-75643ce1a991",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:37.083392+00:00"
+  },
+  {
+    "project_id": "8a09d87d-525d-4bdd-90d9-95e4f7b7f921",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:51.849975+00:00"
+  },
+  {
+    "project_id": "a2ba1498-6461-4261-976c-9de5c477db89",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:51.969250+00:00"
+  },
+  {
+    "project_id": "c6a8230c-d4b9-4a50-9d3b-42f8239bd7ae",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:52.092760+00:00"
+  },
+  {
+    "project_id": "a6c1a4ae-f64c-4b3a-8c48-35c82bcabd20",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:21:52.219198+00:00"
+  },
+  {
+    "project_id": "83b9928d-6ce9-4c9c-b99d-57e0b1dc6358",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:22:59.697249+00:00"
+  },
+  {
+    "project_id": "9a963f80-917b-4e44-a33e-d4da16a25d9d",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:22:59.796079+00:00"
+  },
+  {
+    "project_id": "04bfb030-0ffe-4a6e-b80d-803e01ca41de",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:22:59.941189+00:00"
+  },
+  {
+    "project_id": "c21aa50e-811a-4211-a888-474f9d9bc55e",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:23:00.093957+00:00"
+  },
+  {
+    "project_id": "19d7cf15-bf3b-40e6-a747-0aee67a11ab1",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:23:00.232263+00:00"
+  },
+  {
+    "project_id": "df864582-0b3c-40fd-8440-95ad36bf4872",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:20.349622+00:00"
+  },
+  {
+    "project_id": "768cfe11-ad67-4521-a12d-84e6e632eca3",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:20.452722+00:00"
+  },
+  {
+    "project_id": "60bcc9b3-b19f-4a46-8fc2-fab73a38bcc6",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:20.583437+00:00"
+  },
+  {
+    "project_id": "eaac154f-3a55-4216-9601-7c05fab0c642",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:20.708550+00:00"
+  },
+  {
+    "project_id": "fcddcb32-9c72-4d7f-82f5-b424bd4c3dbd",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:20.847358+00:00"
+  },
+  {
+    "project_id": "7752426b-8d90-467a-9b71-f2ebaee35c95",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:50.384512+00:00"
+  },
+  {
+    "project_id": "bfc2732c-c9b2-42ab-91e8-d083c97648af",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:50.489891+00:00"
+  },
+  {
+    "project_id": "1dbffde7-53b4-4712-b187-803e29c3b511",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:50.605824+00:00"
+  },
+  {
+    "project_id": "d4259e16-6eb9-4fe7-ade2-34bcf34e83c8",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:50.706785+00:00"
+  },
+  {
+    "project_id": "4c296bef-40b6-4922-8037-13d51ca1f8be",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:26:50.835514+00:00"
+  },
+  {
+    "project_id": "7d57c37f-d450-4065-a8ef-3531f37c5be5",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:41:09.367768+00:00"
+  },
+  {
+    "project_id": "6a86435f-8df0-4dd8-b232-1e56df5543c5",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:41:09.459898+00:00"
+  },
+  {
+    "project_id": "7a8ad4d4-5b89-41d8-9452-c4b36b3a375a",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:41:09.590504+00:00"
+  },
+  {
+    "project_id": "bc83ffa2-2a93-4d03-855a-ca4c4f76a6d7",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:41:09.716804+00:00"
+  },
+  {
+    "project_id": "25295f0d-13de-440c-8738-9a9eb1bff600",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:41:09.834772+00:00"
+  },
+  {
+    "project_id": "735280f8-2f85-4ce7-8391-e68f3511487f",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:42:31.988631+00:00"
+  },
+  {
+    "project_id": "c230de68-0583-4d3d-8ac4-76937ec4b43f",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:42:32.112089+00:00"
+  },
+  {
+    "project_id": "35a48121-1932-4fb6-8ec6-71996e838809",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:42:32.225793+00:00"
+  },
+  {
+    "project_id": "b2a91109-056f-4006-8d93-970fedfb1ec7",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:42:32.365910+00:00"
+  },
+  {
+    "project_id": "f15194c1-7ad5-4cda-a989-6b6f35b3384e",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:42:32.492311+00:00"
+  },
+  {
+    "project_id": "f8cf0cf1-c535-472a-9a2b-5c79bc432c15",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:43:12.561096+00:00"
+  },
+  {
+    "project_id": "c379c362-49df-410a-865e-ff4a417a040b",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:43:12.687510+00:00"
+  },
+  {
+    "project_id": "39a5d74a-41ea-42f0-9a9e-9ed602d604a8",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:43:12.813093+00:00"
+  },
+  {
+    "project_id": "e3dfa8e5-aa56-46c2-bbb9-e63262895731",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:43:12.942859+00:00"
+  },
+  {
+    "project_id": "596f00cd-17d7-4402-acfe-83115da95022",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:43:13.074379+00:00"
+  },
+  {
+    "project_id": "e3164fe8-ad24-476c-87a4-16f075d9a83d",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:45:53.653349+00:00"
+  },
+  {
+    "project_id": "78415767-d9c3-4294-80ce-35a5454e5687",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 68.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:45:53.743650+00:00"
+  },
+  {
+    "project_id": "2d845fac-6f0f-406d-a3c0-18953e306c0a",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:45:53.861786+00:00"
+  },
+  {
+    "project_id": "4dbc4f88-af1a-4e35-b36e-8548aa677752",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:45:54.000515+00:00"
+  },
+  {
+    "project_id": "7f07e041-af4c-4f73-8679-04ba22f6851e",
+    "project_name": "demo",
+    "domain": "general",
+    "architecture": "standard",
+    "stack": [
+      "python",
+      "fastapi"
+    ],
+    "planning_score": 95.0,
+    "execution_score": 92.0,
+    "quality_score": 80.89,
+    "repair_count": 0,
+    "test_coverage": 70.0,
+    "result": "FAILED",
+    "metrics": {
+      "planning_time_sec": 0.0,
+      "coding_time_sec": 0.0,
+      "test_time_sec": 0.0,
+      "repair_time_sec": 0.0,
+      "total_time_sec": 0.0,
+      "memory_peak_mb": 0.0,
+      "cpu_avg_pct": 0.0,
+      "tokens_used": 0
+    },
+    "stages": [],
+    "lessons_learned": [],
+    "timestamp": "2026-08-27T13:45:54.139330+00:00"
+  }
+]

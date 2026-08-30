@@ -1,0 +1,1 @@
+"""EOS dependency-injection interfaces."""

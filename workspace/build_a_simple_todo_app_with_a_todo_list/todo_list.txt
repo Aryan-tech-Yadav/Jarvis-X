@@ -1,0 +1,139 @@
+import argparse
+import json
+import logging
+import os
+import subprocess
+
+class TodoList:
+    def __init__(self):
+        self.items = []
+
+    def load_from_config(self, config):
+        if 'todos' in config:
+            for todo in config['todos']:
+                self.add_todo_item(TodoItem(todo['description']))
+
+    def load_from_file(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                self.items = [TodoItem(line.strip()) for line in file.readlines()]
+        except Exception as e:
+            logging.error(f"Error loading todo list from file: {e}")
+
+    def load_from_list(self, list):
+        if list:
+            try:
+                with open(list, 'r') as file:
+                    self.items = [TodoItem(line.strip()) for line in file.readlines()]
+            except FileNotFoundError:
+                logging.error(f"File {list} not found")
+
+    def add_todo_item(self, item):
+        self.items.append(item)
+
+    def delete_todo_item(self, index):
+        try:
+            del self.items[index]
+        except IndexError:
+            logging.error("Invalid index")
+
+    def update_todo_item(self, index, description):
+        try:
+            self.items[index].description = description
+        except IndexError:
+            logging.error("Invalid index")
+
+    def run(self):
+        self._print_main_menu()
+        while True:
+            command = input('Enter command (run, main, init, quit): ').strip()
+            if command in ['run', 'main']:
+                self._run_command()
+            elif command == 'init':
+                self.init()
+            elif command == 'quit':
+                break
+            else:
+                logging.error("Unknown command")
+
+    def _print_main_menu(self):
+        print("Todo List Menu")
+        print("1. Run Todo List")
+        print("2. Main Entry Point")
+        print("3. Initialize Todo List")
+        print("4. Quit")
+
+    def _run_command(self):
+        parser = argparse.ArgumentParser()
+        subparsers = parser.add_subparsers(dest='subcommand')
+
+        run_main_parser = subparser = parser.add_parser('main')
+        run_main_subparser = run_main_parser.add_argument('config', help='path to configuration file')
+
+        run_new_parser = subparser.add_parser('new')
+        run_new_subparser = run_new_parser.add_argument('description', help='new todo item description')
+
+        run_update_parser = subparser.add_parser('update')
+        run_update_subparser = run_update_parser.add_argument('index', type=int, help='index of the todo item to update')
+        run_update_subparser.add_argument('description', help='new description of the todo item')
+
+        run_delete_parser = subparser.add_parser('delete')
+        run_delete_subparser = run_delete_parser.add_argument('index', type=int, help='index of the todo item to delete')
+
+        args = parser.parse_args()
+
+        if args.subcommand == 'main':
+            self.run()
+        elif args.subcommand == 'new':
+            self.add_todo_item(TodoItem(args.description))
+        elif args.subcommand == 'update':
+            try:
+                index = args.index - 1
+                self.update_todo_item(index, args.description)
+            except IndexError:
+                logging.error("Invalid index")
+        elif args.subcommand == 'delete':
+            try:
+                index = args.index - 1
+                self.delete_todo_item(index)
+            except IndexError:
+                logging.error("Invalid index")
+
+    def init(self, config=None, list=None, new=None, update=None, delete=None):
+        if config:
+            with open(config, 'r') as config_file:
+                config = json.load(config_file)
+                self.load_from_config(config)
+        if list:
+            self.load_from_list(list)
+        if new:
+            self.add_todo_item(TodoItem(new))
+        if update:
+            try:
+                index = int(update.split(',')[0]) - 1
+                description = update.split(',')[1]
+                self.update_todo_item(index, description)
+            except ValueError:
+                logging.error("Invalid update format")
+        if delete:
+            try:
+                index = int(delete.split(',')[0]) - 1
+                self.delete_todo_item(index)
+            except ValueError:
+                logging.error("Invalid delete format")
+
+class TodoItem:
+    def __init__(self, description):
+        self.description = description
+
+    def __str__(self):
+        return self.description
+
+def main():
+    logging.basicConfig(level=logging.INFO)
+    todo_list = TodoList()
+    todo_list.init()
+    todo_list.run()
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,32 @@
+{
+  "template_id": "python_cli",
+  "name": "Python CLI Template",
+  "description": "Robust CLI tool with Click and Rich",
+  "project_type": "cli",
+  "tech_stack": {
+    "runtime": "python",
+    "frameworks": [
+      "click",
+      "rich"
+    ],
+    "tools": [
+      "pytest"
+    ]
+  },
+  "files": {
+    "main.py": "import click\nfrom rich.console import Console\nfrom rich.table import Table\n\nconsole = Console()\n\n@click.group()\ndef cli():\n    \"\"\"My CLI Tool\"\"\"\n    pass\n\n@cli.command()\n@click.argument(\"name\")\ndef greet(name: str):\n    \"\"\"Greet someone\"\"\"\n    console.print(f\"[bold green]Hello, {name}![/bold green]\")\n\n@cli.command()\ndef status():\n    \"\"\"Show status\"\"\"\n    table = Table(title=\"Status\")\n    table.add_column(\"Component\", style=\"cyan\")\n    table.add_column(\"Status\", style=\"magenta\")\n    table.add_row(\"Database\", \"Connected\")\n    table.add_row(\"Cache\", \"Running\")\n    console.print(table)\n\nif __name__ == \"__main__\":\n    cli()\n",
+    "requirements.txt": "click>=8.0.0\nrich>=13.0.0\n",
+    "README.md": "# CLI Template\n\nRun: `python main.py --help`\n"
+  },
+  "config": {
+    "entry_point": "main.py"
+  },
+  "tags": [
+    "cli",
+    "click",
+    "rich",
+    "terminal"
+  ],
+  "quality_score": 97.0,
+  "usage_count": 0
+}

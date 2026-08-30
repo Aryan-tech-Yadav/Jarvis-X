@@ -1,0 +1,24 @@
+import json
+
+class DbConfig:
+    def __init__(self):
+        self.config = {}
+
+    def load_db_config(self):
+        try:
+            with open('db_config.txt', 'r') as f:
+                self.config = json.load(f)
+        except FileNotFoundError:
+            self.config = {}
+
+    def save_db_config(self):
+        with open('db_config.txt', 'w') as f:
+            json.dump(self.config, f, indent=4)
+
+    def get_db_config_value(self, key, default=None):
+        return self.config.get(key, default)
+
+    def set_db_config_value(self, key, value):
+        self.config[key] = value
+
+db_config = DbConfig()

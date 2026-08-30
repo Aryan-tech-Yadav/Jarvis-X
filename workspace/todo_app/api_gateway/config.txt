@@ -1,0 +1,42 @@
+import os
+import db  # Import database module
+
+# Configuration settings for the todo_app project
+
+# Database configuration
+def get_db_config():
+    db_config = {}
+    db_config["host"] = os.environ.get("DB_HOST")
+    db_config["port"] = os.environ.get("DB_PORT")
+    db_config["user"] = os.environ.get("DB_USER")
+    db_config["password"] = os.environ.get("DB_PASSWORD")
+    db_config["name"] = os.environ.get("DB_NAME")
+    return db_config
+
+# API endpoint configuration
+def get_api_endpoint():
+    return os.environ.get("API_ENDPOINT")
+
+def load_config(config_file):
+    """Load configuration from the specified file."""
+    try:
+        with open(config_file, 'r') as f:
+            return f.read()
+    except FileNotFoundError:
+        logging.error(f"Config file '{config_file}' not found.")
+        return None
+
+# Update environment variables with configuration settings
+def update_env_vars(config):
+    if config:
+        db_config = get_db_config()
+        os.environ["DB_HOST"] = db_config["host"]
+        os.environ["DB_PORT"] = db_config["port"]
+        os.environ["DB_USER"] = db_config["user"]
+        os.environ["DB_PASSWORD"] = db_config["password"]
+        os.environ["DB_NAME"] = db_config["name"]
+        os.environ["API_ENDPOINT"] = get_api_endpoint()
+
+config_file = 'api_gateway/config.txt'
+config = load_config(config_file)
+update_env_vars(config)

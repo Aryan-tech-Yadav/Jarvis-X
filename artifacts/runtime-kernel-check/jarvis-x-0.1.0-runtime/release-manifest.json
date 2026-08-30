@@ -1,0 +1,2231 @@
+{
+  "artifacts": [
+    "D:\\Jarvis_Project\\Jarvis-X\\artifacts\\runtime-kernel-check\\jarvis-x-0.1.0-runtime\\release-manifest.json",
+    "D:\\Jarvis_Project\\Jarvis-X\\artifacts\\runtime-kernel-check\\jarvis-x-0.1.0-runtime\\release-report.md"
+  ],
+  "benchmarks": {
+    "approval_required": 9,
+    "created_at": "2026-08-24T20:48:16.786840+00:00",
+    "kind": "golden_benchmark",
+    "mode": "preflight",
+    "preflight_passed": 20,
+    "preflight_rate": 1.0,
+    "quality_gate": {
+      "checks": {
+        "complete_catalog": true,
+        "preflight_reliability": true
+      },
+      "passed": true,
+      "thresholds": {
+        "minimum_preflight_rate": 0.85,
+        "required_projects": 20
+      }
+    },
+    "ready": 11,
+    "ready_rate": 0.55,
+    "results": [
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a calculator application with core calculation workflows",
+          "id": "calculator",
+          "required_features": [
+            "core"
+          ],
+          "requires_approval": false,
+          "tier": "basic",
+          "title": "Calculator"
+        },
+        "risk": {
+          "categories": [
+            "timeline"
+          ],
+          "level": "low",
+          "mitigations": [
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 12
+        },
+        "simulation": {
+          "confidence": 0.72,
+          "dependencies": [
+            "fastapi"
+          ],
+          "estimated_files": 9,
+          "estimated_minutes": 43,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "Do users need accounts or should the first version be anonymous?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a Todo API with login, search, and an admin dashboard",
+          "id": "todo-api",
+          "required_features": [
+            "authentication",
+            "search",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "basic",
+          "title": "Todo API"
+        },
+        "risk": {
+          "categories": [
+            "security"
+          ],
+          "level": "low",
+          "mitigations": [
+            "Run a threat model and security scan before deployment."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            }
+          ],
+          "score": 23
+        },
+        "simulation": {
+          "confidence": 0.74,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose"
+          ],
+          "estimated_files": 21,
+          "estimated_minutes": 67,
+          "missing_requirements": [
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a notes application with login, search, and file uploads",
+          "id": "notes-app",
+          "required_features": [
+            "authentication",
+            "search",
+            "uploads"
+          ],
+          "requires_approval": false,
+          "tier": "basic",
+          "title": "Notes App"
+        },
+        "risk": {
+          "categories": [
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 45
+        },
+        "simulation": {
+          "confidence": 0.64,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 21,
+          "estimated_minutes": 67,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a blog application with login, posts, comments, search, and an admin dashboard",
+          "id": "blog",
+          "required_features": [
+            "authentication",
+            "posts",
+            "comments",
+            "search",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "basic",
+          "title": "Blog"
+        },
+        "risk": {
+          "categories": [
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 35
+        },
+        "simulation": {
+          "confidence": 0.7,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose"
+          ],
+          "estimated_files": 25,
+          "estimated_minutes": 75,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a CRM application with login, customer profiles, search, reports, and an admin dashboard",
+          "id": "crm",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "search",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "intermediate",
+          "title": "CRM"
+        },
+        "risk": {
+          "categories": [
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 53
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 29,
+          "estimated_minutes": 83,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a chat application with login, realtime messaging, notifications, and profiles",
+          "id": "chat-app",
+          "required_features": [
+            "authentication",
+            "realtime",
+            "notifications",
+            "profiles"
+          ],
+          "requires_approval": false,
+          "tier": "intermediate",
+          "title": "Chat App"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "performance",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Define load targets and test the critical realtime path.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "performance",
+              "score": 15,
+              "source": "realtime"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 68
+        },
+        "simulation": {
+          "confidence": 0.64,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart",
+            "websockets"
+          ],
+          "estimated_files": 25,
+          "estimated_minutes": 75,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a school ERP with login, student profiles, search, reports, and an admin dashboard",
+          "id": "school-erp",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "search",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "intermediate",
+          "title": "School ERP"
+        },
+        "risk": {
+          "categories": [
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 53
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 29,
+          "estimated_minutes": 83,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build an inventory application with login, search, uploads, reports, and an admin dashboard",
+          "id": "inventory",
+          "required_features": [
+            "authentication",
+            "search",
+            "uploads",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "intermediate",
+          "title": "Inventory"
+        },
+        "risk": {
+          "categories": [
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 53
+        },
+        "simulation": {
+          "confidence": 0.64,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 25,
+          "estimated_minutes": 75,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a CMS with login, posts, uploads, search, comments, and an admin dashboard",
+          "id": "cms",
+          "required_features": [
+            "authentication",
+            "posts",
+            "uploads",
+            "search",
+            "comments",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "intermediate",
+          "title": "CMS"
+        },
+        "risk": {
+          "categories": [
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 53
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 33,
+          "estimated_minutes": 91,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build an HRMS with login, employee profiles, search, notifications, and an admin dashboard",
+          "id": "hrms",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "search",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "intermediate",
+          "title": "HRMS"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 61
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 33,
+          "estimated_minutes": 91,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a hospital management application with login, patient profiles, search, uploads, notifications, and an admin dashboard",
+          "id": "hospital",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "search",
+            "uploads",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "advanced",
+          "title": "Hospital Management"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 61
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 33,
+          "estimated_minutes": 91,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "Payment handling requires human approval before execution.",
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build an e-commerce application with login, checkout payments, search, uploads, profiles, and an admin dashboard",
+          "id": "ecommerce",
+          "required_features": [
+            "authentication",
+            "payments",
+            "search",
+            "uploads",
+            "profiles",
+            "admin"
+          ],
+          "requires_approval": true,
+          "tier": "advanced",
+          "title": "E-commerce"
+        },
+        "risk": {
+          "categories": [
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "security",
+              "score": 25,
+              "source": "payments"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 70
+        },
+        "simulation": {
+          "confidence": 0.52,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "psycopg",
+            "python-jose",
+            "python-multipart",
+            "stripe"
+          ],
+          "estimated_files": 29,
+          "estimated_minutes": 83,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "payment compliance and webhook verification",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "Payment handling requires human approval before execution.",
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a banking application with login, payment transfers, profiles, notifications, reports, and an admin dashboard",
+          "id": "banking",
+          "required_features": [
+            "authentication",
+            "payments",
+            "profiles",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": true,
+          "tier": "advanced",
+          "title": "Banking"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 25,
+              "source": "payments"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 78
+        },
+        "simulation": {
+          "confidence": 0.52,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "psycopg",
+            "python-jose",
+            "python-multipart",
+            "stripe"
+          ],
+          "estimated_files": 33,
+          "estimated_minutes": 91,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "payment compliance and webhook verification",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build an LMS with login, student profiles, posts, uploads, search, notifications, and an admin dashboard",
+          "id": "lms",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "posts",
+            "uploads",
+            "search",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "advanced",
+          "title": "Learning Management System"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 61
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 37,
+          "estimated_minutes": 99,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a social network with login, profiles, posts, comments, uploads, search, and notifications",
+          "id": "social-network",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "posts",
+            "comments",
+            "uploads",
+            "search",
+            "notifications"
+          ],
+          "requires_approval": false,
+          "tier": "advanced",
+          "title": "Social Network"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 53
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 37,
+          "estimated_minutes": 99,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "Payment handling requires human approval before execution.",
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build an AI SaaS application with login, payments, profiles, search, notifications, and an admin dashboard",
+          "id": "ai-saas",
+          "required_features": [
+            "authentication",
+            "payments",
+            "profiles",
+            "search",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": true,
+          "tier": "expert",
+          "title": "AI SaaS"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 25,
+              "source": "payments"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 78
+        },
+        "simulation": {
+          "confidence": 0.52,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "psycopg",
+            "python-jose",
+            "python-multipart",
+            "stripe"
+          ],
+          "estimated_files": 37,
+          "estimated_minutes": 99,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "payment compliance and webhook verification",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a multi-agent platform with login, realtime notifications, search, reports, and an admin dashboard",
+          "id": "multi-agent",
+          "required_features": [
+            "authentication",
+            "realtime",
+            "notifications",
+            "search",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "expert",
+          "title": "Multi-Agent Platform"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "performance",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Define load targets and test the critical realtime path.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "performance",
+              "score": 15,
+              "source": "realtime"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 58
+        },
+        "simulation": {
+          "confidence": 0.64,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "websockets"
+          ],
+          "estimated_files": 29,
+          "estimated_minutes": 83,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": true,
+          "reasons": []
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a VS Code extension with login, search, notifications, and an admin dashboard",
+          "id": "vscode-extension",
+          "required_features": [
+            "authentication",
+            "search",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "expert",
+          "title": "VS Code Extension"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "security",
+            "timeline"
+          ],
+          "level": "medium",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            }
+          ],
+          "score": 43
+        },
+        "simulation": {
+          "confidence": 0.7,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose"
+          ],
+          "estimated_files": 25,
+          "estimated_minutes": 75,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "ready",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a file synchronization application with login, profiles, file uploads, search, notifications, and an admin dashboard",
+          "id": "file-sync",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "uploads",
+            "search",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "expert",
+          "title": "File Sync Tool"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 61
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 33,
+          "estimated_minutes": 91,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      },
+      {
+        "approval": {
+          "approved": false,
+          "reasons": [
+            "High delivery risk requires human approval before execution."
+          ]
+        },
+        "checks": {
+          "architecture_valid": true,
+          "optimized_verification": true,
+          "required_features_detected": true,
+          "requirements_valid": true,
+          "simulation_complete": true,
+          "strategy_selected": true
+        },
+        "missing_features": [],
+        "preflight_passed": true,
+        "project": {
+          "goal": "Build a project management application with login, profiles, posts, comments, search, notifications, and an admin dashboard",
+          "id": "project-management",
+          "required_features": [
+            "authentication",
+            "profiles",
+            "posts",
+            "comments",
+            "search",
+            "notifications",
+            "admin"
+          ],
+          "requires_approval": false,
+          "tier": "expert",
+          "title": "Project Management Tool"
+        },
+        "risk": {
+          "categories": [
+            "dependency",
+            "scalability",
+            "security",
+            "timeline"
+          ],
+          "level": "high",
+          "mitigations": [
+            "Pin and audit third-party integrations.",
+            "Document a scale-out path before committing to the data model.",
+            "Run a threat model and security scan before deployment.",
+            "Resolve the listed clarifying questions before planning implementation."
+          ],
+          "risks": [
+            {
+              "category": "security",
+              "score": 8,
+              "source": "admin"
+            },
+            {
+              "category": "security",
+              "score": 15,
+              "source": "authentication"
+            },
+            {
+              "category": "dependency",
+              "score": 8,
+              "source": "notifications"
+            },
+            {
+              "category": "security",
+              "score": 10,
+              "source": "uploads"
+            },
+            {
+              "category": "timeline",
+              "score": 12,
+              "source": "ambiguous requirements"
+            },
+            {
+              "category": "scalability",
+              "score": 8,
+              "source": "Use object storage and a migration path before high-volume uploads."
+            }
+          ],
+          "score": 61
+        },
+        "simulation": {
+          "confidence": 0.58,
+          "dependencies": [
+            "fastapi",
+            "passlib",
+            "python-jose",
+            "python-multipart"
+          ],
+          "estimated_files": 41,
+          "estimated_minutes": 107,
+          "missing_requirements": [
+            "Should this be a web app, mobile app, desktop app, API, or CLI?",
+            "What deadline, budget, privacy, or scale constraints should guide the design?"
+          ],
+          "risks": [
+            "authentication design and credential storage",
+            "file upload validation and storage",
+            "large scope requires incremental delivery",
+            "missing scale, budget, or privacy constraints"
+          ]
+        },
+        "status": "needs_approval",
+        "strategy": {
+          "confidence": 0.62,
+          "description": "Small, fast initial web application",
+          "difficulty": "low",
+          "estimated_minutes": 35,
+          "name": "flask-minimal",
+          "reasons": [
+            "estimated 35 minutes",
+            "risk score 26%",
+            "historical success 50%"
+          ],
+          "risk": 0.26,
+          "score": 65.66
+        }
+      }
+    ],
+    "tiers": {
+      "advanced": {
+        "preflight_passed": 5,
+        "ready": 1,
+        "total": 5
+      },
+      "basic": {
+        "preflight_passed": 4,
+        "ready": 4,
+        "total": 4
+      },
+      "expert": {
+        "preflight_passed": 5,
+        "ready": 2,
+        "total": 5
+      },
+      "intermediate": {
+        "preflight_passed": 6,
+        "ready": 4,
+        "total": 6
+      }
+    },
+    "total": 20
+  },
+  "created_at": "2026-08-24T20:48:16.974151+00:00",
+  "documentation": {
+    "missing": [],
+    "passed": true,
+    "summary": "Required release documentation is present."
+  },
+  "gates": {
+    "benchmarks": {
+      "passed": true,
+      "summary": "20/20 preflights passed"
+    },
+    "documentation": {
+      "passed": true,
+      "summary": "Required release documentation is present."
+    },
+    "security": {
+      "passed": true,
+      "summary": "0 high-severity findings"
+    },
+    "tests": {
+      "passed": true,
+      "summary": "276 tests run"
+    }
+  },
+  "project_root": "D:\\Jarvis_Project\\Jarvis-X",
+  "security": {
+    "files_scanned": 375,
+    "findings": [],
+    "high_severity": 0,
+    "passed": true
+  },
+  "success": true,
+  "tests": {
+    "output": "[02:18:07] [INFO] Indexed 1 changed knowledge documents from C:\\Users\\fftec\\AppData\\Local\\Temp\\tmp5krgdj5c\\project\n[02:18:07] [INFO] Indexed 1 changed knowledge documents from C:\\Users\\fftec\\AppData\\Local\\Temp\\tmp5krgdj5c\\project\n[02:18:07] [INFO] Indexed 1 changed knowledge documents from C:\\Users\\fftec\\AppData\\Local\\Temp\\tmpqaol2256\\project\n[02:18:07] [INFO] Indexed 0 changed knowledge documents from C:\\Users\\fftec\\AppData\\Local\\Temp\\tmpqaol2256\\project\n[02:18:07] [INFO] Learned experience for: Build a calculator\n[02:18:07] [INFO] Learned experience for: Build a calculator\n[02:18:07] [INFO] Learned experience for: Build API\n[02:18:07] [INFO] Learned experience for: Build a calculator\n[02:18:07] [INFO] [Researcher] Starting\n[02:18:07] [INFO] [Planner] Starting\n[02:18:07] [INFO] [Analyzer] Starting\n[02:18:07] [INFO] [Coder] Starting\n[02:18:07] [INFO] [Reviewer] Starting\n[02:18:07] [INFO] [Critic] Starting\n[02:18:07] [INFO] [Validator] Starting\n[02:18:07] [INFO] Learned experience for: Build app\n[02:18:07] [INFO] [Researcher] Starting\n[02:18:07] [INFO] [Planner] Starting\n[02:18:07] [INFO] [Analyzer] Starting\n[02:18:07] [INFO] [Coder] Starting\n[02:18:07] [INFO] [Reviewer] Starting\n[02:18:07] [INFO] [Critic] Starting\n[02:18:07] [INFO] [Validator] Starting\n[02:18:07] [INFO] [Repair] Starting\n[02:18:07] [INFO] [Validator] Starting\n[02:18:07] [INFO] [Reviewer] Starting\n[02:18:07] [INFO] [Critic] Starting\n[02:18:07] [INFO] [Validator] Starting\n[02:18:07] [INFO] Learned experience for: Build app\n[02:18:07] [INFO] [Planner] Executing task\n[02:18:07] [INFO] [Planner] Executing task\n[02:18:07] [INFO] [Executor] Executing task\n[02:18:07] [INFO] [Reflection] Executing task\n[02:18:07] [INFO] [Critic] Executing task\n[02:18:07] [ERROR] Modifying project: missing_project -> Project path not found\n{\n  \"success\": false,\n  \"artifacts\": [\n    \"manifest.json\"\n  ]\n}\n{\n  \"success\": true,\n  \"artifacts\": [\n    \"release.zip\"\n  ]\n}\n----------------------------------------------------------------------\nRan 276 tests in 10.021s\n\nOK",
+    "success": true,
+    "tests_run": 276
+  },
+  "version": "0.1.0-runtime"
+}

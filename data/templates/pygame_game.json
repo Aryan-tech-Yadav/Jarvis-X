@@ -1,0 +1,31 @@
+{
+  "template_id": "pygame_game",
+  "name": "Pygame 2D Game Template",
+  "description": "Minimal Pygame template with game loop, events, and rendering",
+  "project_type": "game",
+  "tech_stack": {
+    "runtime": "python",
+    "frameworks": [
+      "pygame"
+    ],
+    "tools": [
+      "pytest"
+    ]
+  },
+  "files": {
+    "main.py": "import pygame\nimport sys\n\nclass Game:\n    def __init__(self, width=800, height=600):\n        pygame.init()\n        self.screen = pygame.display.set_mode((width, height))\n        pygame.display.set_caption(\"Game\")\n        self.clock = pygame.time.Clock()\n        self.running = True\n\n    def handle_events(self):\n        for event in pygame.event.get():\n            if event.type == pygame.QUIT:\n                self.running = False\n\n    def update(self):\n        pass\n\n    def render(self):\n        self.screen.fill((0, 0, 0))\n        pygame.display.flip()\n\n    def run(self):\n        while self.running:\n            self.handle_events()\n            self.update()\n            self.render()\n            self.clock.tick(60)\n        pygame.quit()\n        sys.exit()\n\nif __name__ == \"__main__\":\n    game = Game()\n    game.run()\n",
+    "requirements.txt": "pygame>=2.0.0\n",
+    "README.md": "# Pygame Game Template\n\nRun: `python main.py`\n"
+  },
+  "config": {
+    "entry_point": "main.py"
+  },
+  "tags": [
+    "game",
+    "pygame",
+    "2d",
+    "arcade"
+  ],
+  "quality_score": 98.0,
+  "usage_count": 11
+}

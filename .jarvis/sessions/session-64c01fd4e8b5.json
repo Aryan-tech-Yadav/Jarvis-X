@@ -1,0 +1,29 @@
+{
+  "session_id": "session-64c01fd4e8b5",
+  "project_name": "build",
+  "goal": "Build Test Project",
+  "status": "completed",
+  "current_phase": "reviewer",
+  "completed_tasks": [
+    "requirement",
+    "architect",
+    "backend",
+    "database",
+    "frontend",
+    "tester",
+    "repair",
+    "documentation",
+    "deployment",
+    "reviewer"
+  ],
+  "pending_tasks": [
+    "ceo"
+  ],
+  "artifacts": [],
+  "errors": [],
+  "logs": [],
+  "started_at": "2026-08-26T20:36:40.755097+00:00",
+  "completed_at": "2026-08-26T20:36:40.785200+00:00",
+  "last_activity_at": "2026-08-26T20:36:40.785200+00:00",
+  "metadata": {}
+}

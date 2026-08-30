@@ -1,0 +1,28 @@
+{
+  "nodes": {
+    "hospital": {
+      "node_id": "hospital",
+      "label": "Hospital",
+      "node_type": "project",
+      "properties": {},
+      "created_at": "2026-08-27T12:29:56.095958+00:00"
+    },
+    "auth": {
+      "node_id": "auth",
+      "label": "Authentication",
+      "node_type": "component",
+      "properties": {},
+      "created_at": "2026-08-27T12:29:56.095958+00:00"
+    }
+  },
+  "edges": [
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-08-27T12:29:56.095958+00:00"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "project_id": "test-id",
+  "project_name": "Hospital",
+  "current_task": null,
+  "current_phase": null,
+  "status": "pending",
+  "completed_tasks": [],
+  "failed_tasks": [],
+  "pending_tasks": [
+    "t1",
+    "t2"
+  ],
+  "created_files": [],
+  "test_coverage": 0.0,
+  "runtime_errors": [],
+  "started_at": "2026-08-27T12:42:58.538207+00:00",
+  "completed_at": null,
+  "metadata": {}
+}

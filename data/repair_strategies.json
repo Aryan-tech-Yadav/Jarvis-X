@@ -1,0 +1,68 @@
+[
+  {
+    "strategy_id": "syntax-error-fix",
+    "error_type": "syntax_error",
+    "agent_name": "repair",
+    "action": "fix_syntax",
+    "success_count": 0,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "avg_duration": 0.0,
+    "metadata": {}
+  },
+  {
+    "strategy_id": "import-error-fix",
+    "error_type": "import_error",
+    "agent_name": "repair",
+    "action": "fix_imports",
+    "success_count": 0,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "avg_duration": 0.0,
+    "metadata": {}
+  },
+  {
+    "strategy_id": "test-failure-fix",
+    "error_type": "test_failure",
+    "agent_name": "repair",
+    "action": "fix_tests",
+    "success_count": 0,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "avg_duration": 0.0,
+    "metadata": {}
+  },
+  {
+    "strategy_id": "runtime-error-fix",
+    "error_type": "runtime_error",
+    "agent_name": "repair",
+    "action": "fix_runtime",
+    "success_count": 0,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "avg_duration": 0.0,
+    "metadata": {}
+  },
+  {
+    "strategy_id": "type-error-fix",
+    "error_type": "type_error",
+    "agent_name": "repair",
+    "action": "fix_types",
+    "success_count": 0,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "avg_duration": 0.0,
+    "metadata": {}
+  },
+  {
+    "strategy_id": "dependency-error-fix",
+    "error_type": "dependency_error",
+    "agent_name": "repair",
+    "action": "fix_dependencies",
+    "success_count": 0,
+    "failure_count": 0,
+    "success_rate": 0.0,
+    "avg_duration": 0.0,
+    "metadata": {}
+  }
+]
