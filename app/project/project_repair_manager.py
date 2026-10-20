@@ -1,5 +1,5 @@
-import os
 import re
+from pathlib import Path
 
 from app.ai.ai_manager import AIManager
 from app.agent.file_manager import FileManager
@@ -27,12 +27,15 @@ class ProjectRepairManager:
             if file_name not in file_errors:
                 continue
 
-            file_path = os.path.join(base_path, file_name)
+            try:
+                file_path = self._resolve_project_path(base_path, file_name)
+            except (ValueError, OSError):
+                continue
+
             current_code = ""
-            if os.path.isfile(file_path):
+            if file_path.is_file():
                 try:
-                    with open(file_path, "r", encoding="utf-8") as file:
-                        current_code = file.read()
+                    current_code = file_path.read_text(encoding="utf-8")
                 except (OSError, UnicodeDecodeError):
                     continue
 
@@ -51,16 +54,43 @@ class ProjectRepairManager:
                 if not passed:
                     continue
 
-            os.makedirs(os.path.dirname(file_path), exist_ok=True)
-            self.files.overwrite_file(file_path, repaired_code)
+            try:
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                file_path.write_text(repaired_code, encoding="utf-8")
+            except OSError:
+                continue
+
             repaired_files.append(file_name)
 
         return repaired_files
 
+    @staticmethod
+    def _resolve_project_path(base_path, file_name):
+        """Resolve a repair target and reject paths outside the project."""
+        root = Path(base_path).expanduser().resolve()
+        supplied = Path(file_name)
+
+        if supplied.is_absolute():
+            raise ValueError("Absolute repair paths are not allowed")
+
+        target = (root / supplied).resolve()
+
+        try:
+            target.relative_to(root)
+        except ValueError as exc:
+            raise ValueError(
+                "Repair path must remain inside the project"
+            ) from exc
+
+        if target == root:
+            raise ValueError("Repair target must be a file inside the project")
+
+        return target
+
     def _file_errors(self, validation_message):
         errors = {}
         for line in validation_message.splitlines():
-            match = re.search(r"(?:Missing:|Empty file:|Syntax error in|Invalid import in)\s+([^:]+)", line)
+            match = re.search(r"(?:Missing:|Empty file:|Syntax/read error in|Syntax error in|Invalid import in)\s+([^:]+)", line)
             if match:
                 file_name = match.group(1).strip()
                 errors.setdefault(file_name, []).append(line)
@@ -94,6 +124,9 @@ Do not explain anything.
 """
 
     def _clean_response(self, response):
+        if not isinstance(response, str):
+            return ""
+
         return (
             response.replace("```python", "")
             .replace("```markdown", "")

@@ -17,7 +17,8 @@ class ProjectReadmeGenerator:
                 requirements = file.read().strip()
 
         files = []
-        for root, _, file_names in os.walk(base_path):
+        for root, directories, file_names in os.walk(base_path):
+            directories[:] = [d for d in directories if d not in {".git", ".venv", "venv", "__pycache__", "node_modules"}]
             for file_name in file_names:
                 relative_path = os.path.relpath(
                     os.path.join(root, file_name),

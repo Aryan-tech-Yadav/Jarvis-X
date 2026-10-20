@@ -13,7 +13,8 @@ class ProjectDependencyManager:
         dependencies = set()
         local_modules = self._local_modules(base_path)
 
-        for root, _, files in os.walk(base_path):
+        for root, directories, files in os.walk(base_path):
+            directories[:] = [d for d in directories if d not in {".git", ".venv", "venv", "__pycache__", "node_modules"}]
             for file_name in files:
                 if not file_name.endswith(".py"):
                     continue
@@ -28,7 +29,7 @@ class ProjectDependencyManager:
                 for node in ast.walk(tree):
                     if isinstance(node, ast.Import):
                         dependencies.update(alias.name.split(".")[0] for alias in node.names)
-                    elif isinstance(node, ast.ImportFrom) and node.module:
+                    elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
                         dependencies.add(node.module.split(".")[0])
 
         return sorted(
@@ -41,6 +42,7 @@ class ProjectDependencyManager:
         modules = set()
 
         for root, directories, files in os.walk(base_path):
+            directories[:] = [d for d in directories if d not in {".git", ".venv", "venv", "__pycache__", "node_modules"}]
             for file_name in files:
                 if file_name.endswith(".py"):
                     modules.add(file_name[:-3])

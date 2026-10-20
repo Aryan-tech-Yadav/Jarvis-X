@@ -21,9 +21,9 @@ class ProjectWriter:
         
         response = self.ai.ask(prompt)
         
-        response = response.replace("'''python", "")
-        response = response.replace("'''py", "")
-        response = response.replace("'''", "")
+        response = response.replace("```python", "")
+        response = response.replace("```py", "")
+        response = response.replace("```", "")
         response = response.strip()
         
         

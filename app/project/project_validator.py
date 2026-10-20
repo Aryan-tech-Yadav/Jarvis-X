@@ -61,7 +61,7 @@ class ProjectValidator:
 
         if not any(
             os.path.isfile(os.path.join(base_path, entry_point))
-            for entry_point in ("main.py", "game.py")
+            for entry_point in ("main.py", "game.py", "app.py")
         ):
             errors.append("Project cannot run: main.py or game.py not found")
 

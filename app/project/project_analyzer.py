@@ -67,7 +67,7 @@ class ProjectAnalyzer:
                 summary[target].append({"name": node.name, "file": relative_path})
             elif isinstance(node, ast.Import):
                 dependencies.update(alias.name.split(".")[0] for alias in node.names)
-            elif isinstance(node, ast.ImportFrom) and node.module:
+            elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
                 dependencies.add(node.module.split(".")[0])
 
     def _read_text(self, file_path, summary):

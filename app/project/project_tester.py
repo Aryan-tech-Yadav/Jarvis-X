@@ -8,7 +8,7 @@ class ProjectTester:
         pass
     
     def test(self, file_info, code):
-        if file_info["type"] != "python":
+        if file_info.get("type", "python") != "python":
             return True, "Non-Python file skipped."
         
         if not code or not code.strip():

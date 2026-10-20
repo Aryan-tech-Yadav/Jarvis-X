@@ -5,6 +5,7 @@ from app.project.project_writer import ProjectWriter
 from app.project.project_fixer import ProjectFixer
 from app.agent.file_manager import FileManager
 from app.project.project_tester import ProjectTester
+from app.project.project_static_validator import ProjectStaticValidator
 from app.project.project_runner import ProjectRunner
 from app.project.project_runtime_fixer import ProjectRuntimeFixer
 from app.project.project_validator import ProjectValidator
@@ -19,13 +20,16 @@ import shutil
 
 class ProjectBuilder:
     
-    def __init__(self):
-        self.planner = ProjectPlanner()
+    def __init__(self, use_reconnaissance=False):
+        self.planner = ProjectPlanner(
+            use_reconnaissance=use_reconnaissance
+        )
         self.generator = ProjectGenerator()
         self.designer = ProjectDesigner()
         self.writer = ProjectWriter()
         self.fixer = ProjectFixer()
         self.tester = ProjectTester()
+        self.static_tester = ProjectStaticValidator()
         self.runner = ProjectRunner()
         self.runtime_fixer = ProjectRuntimeFixer()
         self.validator = ProjectValidator()
@@ -69,6 +73,76 @@ class ProjectBuilder:
         passed = False
         output = ""
         for attempt in self.retry.attempts():
+            static_passed = False
+            static_message = ""
+
+            # Initial validation plus at most two repair attempts.
+            for repair_attempt in range(3):
+                static_passed, static_message = (
+                    self.static_tester.validate_project(base_path)
+                )
+                Logger.info(f"STATIC VALIDATION: {static_message}")
+
+                if static_passed:
+                    break
+
+                Logger.warning(
+                    f"Static validation failed (attempt {repair_attempt + 1}/3)."
+                )
+
+                if repair_attempt == 2:
+                    break
+
+                repair_lines = []
+                for line in static_message.splitlines():
+                    if line.startswith("Syntax/read error in "):
+                        location, detail = line.split(": ", 1)
+                        file_name = location.removeprefix(
+                            "Syntax/read error in "
+                        ).strip()
+                        if file_name.endswith(".py"):
+                            repair_lines.append(
+                                f"Syntax error in {file_name}: {detail}"
+                            )
+                        continue
+
+                    if ": " not in line:
+                        continue
+
+                    location, detail = line.split(": ", 1)
+                    file_name = location.rsplit(":", 1)[0]
+                    if file_name.endswith(".py"):
+                        repair_lines.append(
+                            f"Invalid import in {file_name}: {detail}"
+                        )
+
+                if not repair_lines:
+                    Logger.warning(
+                        "No repairable file references found; stopping auto-repair."
+                    )
+                    break
+
+                repaired_files = self.repair.repair(
+                    project,
+                    base_path,
+                    "\n".join(repair_lines),
+                )
+                if not repaired_files:
+                    Logger.warning("Auto-repair produced no accepted file changes.")
+                    break
+
+                Logger.info(
+                    f"Static auto-repair changed: {', '.join(repaired_files)}"
+                )
+
+            if not static_passed:
+                passed = False
+                output = static_message
+                Logger.error(
+                    "Static validation failed; refusing to execute generated project."
+                )
+                break
+
             passed, output = self.runner.run(base_path)
             Logger.info("RUN RESULT" if attempt == 0 else f"RETRY {attempt} RESULT")
             if output:
@@ -130,40 +204,93 @@ class ProjectBuilder:
         return base_path
 
     def _build_from_template(self, augmented, project_name=None, base_path=None):
-        """Build project from template."""
-        project_name = project_name or augmented.get("template_name", "template_project")
+        """Build a template project after validating all output paths."""
+        project_name = project_name or augmented.get(
+            "template_name", "template_project"
+        )
         if base_path is None:
             base_path = os.path.join("workspace", project_name)
 
-        if os.path.exists(base_path):
-            shutil.rmtree(base_path)
-        os.makedirs(base_path, exist_ok=True)
+        requested_root = os.path.abspath(base_path)
+        if os.path.islink(requested_root):
+            raise ValueError("Template project path cannot be a symlink")
+        root = os.path.realpath(requested_root)
 
         files = augmented.get("files", {})
-        for filename, content in files.items():
-            file_path = os.path.join(base_path, filename)
-            os.makedirs(os.path.dirname(file_path), exist_ok=True)
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(content)
+        if not isinstance(files, dict):
+            raise ValueError("Template files must be a mapping")
 
-        # Generate requirements if tech stack available
+        # Validate ALL paths before replacing an existing project.
+        validated_files = []
+        for filename, content in files.items():
+            try:
+                relative = os.fspath(filename)
+            except TypeError as exc:
+                raise ValueError("Template filenames must be path strings") from exc
+
+            if not isinstance(relative, str) or not relative:
+                raise ValueError("Template filenames must be non-empty strings")
+            if os.path.isabs(relative):
+                raise ValueError("Absolute template file paths are not allowed")
+            if not isinstance(content, str):
+                raise ValueError(
+                    f"Template content for {relative!r} must be text"
+                )
+
+            file_path = os.path.realpath(os.path.join(root, relative))
+            try:
+                inside_root = os.path.commonpath([root, file_path]) == root
+            except ValueError:
+                inside_root = False
+
+            if not inside_root or file_path == root:
+                raise ValueError("Template file path escapes the project")
+
+            validated_files.append((file_path, content))
+
+        # Only replace the existing directory after path preflight succeeds.
+        os.makedirs(os.path.dirname(root), exist_ok=True)
+
+        if os.path.islink(requested_root):
+            raise ValueError("Template project path cannot be a symlink")
+
+        if os.path.exists(root):
+            if not os.path.isdir(root):
+                raise ValueError("Template project path must be a directory")
+            shutil.rmtree(root)
+
+        os.makedirs(root, exist_ok=True)
+
+        for file_path, content in validated_files:
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            with open(file_path, "w", encoding="utf-8") as handle:
+                handle.write(content)
+
         tech_stack = augmented.get("tech_stack", {})
         frameworks = tech_stack.get("frameworks", [])
         if frameworks and "requirements.txt" not in files:
-            req_path = os.path.join(base_path, "requirements.txt")
-            with open(req_path, "w", encoding="utf-8") as f:
-                f.write("\n".join(frameworks) + "\n")
-            Logger.success(f"Requirements generated: {req_path}")
+            with open(os.path.join(root, "requirements.txt"), "w",
+                      encoding="utf-8") as handle:
+                handle.write("\n".join(frameworks) + "\n")
 
-        # Generate README if not present
         if "README.md" not in files:
-            readme_path = os.path.join(base_path, "README.md")
-            with open(readme_path, "w", encoding="utf-8") as f:
-                f.write(f"# {project_name}\n\n{augmented.get('template_name', 'Template project')}\n")
-            Logger.success(f"README generated: {readme_path}")
+            with open(os.path.join(root, "README.md"), "w",
+                      encoding="utf-8") as handle:
+                handle.write(
+                    f"# {project_name}\n\n"
+                    f"{augmented.get('template_name', 'Template project')}\n"
+                )
 
-        return base_path
-    
+        passed, message = self.static_tester.validate_project(root)
+        Logger.info(f"TEMPLATE STATIC VALIDATION: {message}")
+
+        if not passed:
+            raise ValueError(
+                f"Template project failed static validation: {message}"
+            )
+
+        return root
+
     def generate_files(self, project, base_path):
         generated_files = []
 
