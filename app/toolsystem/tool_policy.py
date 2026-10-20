@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import shlex
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -20,6 +21,10 @@ class ToolPolicy:
         "dd if=/dev/zero",
         "format c:",
     }
+
+    # Keep this allowlist conservative. TerminalTool has its own execution
+    # restrictions; this policy also protects ToolRegistry's terminal route.
+    ALLOWED_COMMANDS = {"echo", "pwd", "ls", "whoami", "pytest", "python"}
 
     def __init__(self, workspace_root: Optional[str] = None, allowed_permissions: Optional[List[str]] = None):
         self.workspace_root = Path(workspace_root).resolve() if workspace_root else Path.cwd()
@@ -39,8 +44,44 @@ class ToolPolicy:
             return False
 
     def is_command_safe(self, command: str) -> bool:
+        """Accept only simple commands whose executable is explicitly allowed."""
+        if not isinstance(command, str) or not command.strip():
+            return False
+
         cmd_clean = command.strip().lower()
-        for forbidden in self.FORBIDDEN_COMMANDS:
-            if forbidden in cmd_clean:
-                return False
+        if any(pattern in cmd_clean for pattern in self.FORBIDDEN_COMMANDS):
+            return False
+
+        try:
+            lexer = shlex.shlex(
+                command,
+                posix=True,
+                punctuation_chars=";&|<>",
+            )
+            lexer.whitespace_split = True
+            tokens = list(lexer)
+        except (ValueError, TypeError):
+            return False
+
+        if not tokens:
+            return False
+
+        shell_punctuation = set(";&|<>")
+        if any(
+            token and all(char in shell_punctuation for char in token)
+            for token in tokens
+        ):
+            return False
+
+        executable = tokens[0].lower()
+        # Do not allow absolute or relative executable paths.
+        if "/" in tokens[0] or "\\\\" in tokens[0]:
+            return False
+        if executable not in self.ALLOWED_COMMANDS:
+            return False
+
+        # Python is limited to a harmless version query.
+        if executable == "python":
+            return tokens == ["python", "--version"]
+
         return True
