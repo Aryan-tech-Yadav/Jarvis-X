@@ -26,7 +26,7 @@ class IntentClassifier:
         prompt = INTENT_PROMPT.format(user_input=user_input.strip())
         try:
             result = json.loads(clean_json(self.ai.ask(prompt)))
-        except (json.JSONDecodeError, TypeError, AttributeError):
+        except Exception:
             return self._fallback(user_input)
 
         intent = result.get("intent")

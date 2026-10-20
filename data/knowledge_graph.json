@@ -5,14 +5,14 @@
       "label": "Hospital",
       "node_type": "project",
       "properties": {},
-      "created_at": "2026-08-27T12:29:56.095958+00:00"
+      "created_at": "2026-10-20T18:49:02.992155+00:00"
     },
     "auth": {
       "node_id": "auth",
       "label": "Authentication",
       "node_type": "component",
       "properties": {},
-      "created_at": "2026-08-27T12:29:56.095958+00:00"
+      "created_at": "2026-10-20T18:49:02.992596+00:00"
     }
   },
   "edges": [
@@ -23,6 +23,398 @@
       "weight": 1.0,
       "properties": {},
       "created_at": "2026-08-27T12:29:56.095958+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T09:29:34.542032+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T09:40:07.013375+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T09:56:27.090396+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T09:57:30.737135+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T10:07:40.655667+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T10:40:10.646490+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T10:52:51.336663+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T17:35:57.205790+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T17:41:53.685275+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T17:46:57.567261+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T17:50:51.644457+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T18:11:06.585703+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-14T18:21:39.235941+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T10:56:29.384835+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T11:42:10.871885+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:00:44.313109+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:04:48.509072+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:10:43.613304+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:15:26.449619+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:17:30.467041+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:20:12.380045+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:28:38.978620+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:34:31.931164+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:50:24.612962+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T17:52:42.353934+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-15T18:05:38.077679+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T17:41:04.925658+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T17:49:41.341628+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T17:59:09.059971+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T18:35:52.181461+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T19:39:00.345745+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T19:53:14.545362+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T19:57:31.168050+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-18T20:09:09.642079+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-19T07:53:07.896350+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-19T08:03:41.394753+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-19T08:13:22.134655+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-19T08:35:42.655028+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-19T08:37:27.116515+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-19T09:35:39.908957+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T04:07:16.692761+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T04:11:13.914414+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T04:15:25.985159+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T04:21:45.357586+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T04:26:19.223820+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T05:16:57.659906+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T05:29:18.159158+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T18:14:55.475069+00:00"
+    },
+    {
+      "source": "hospital",
+      "target": "auth",
+      "relation": "contains",
+      "weight": 1.0,
+      "properties": {},
+      "created_at": "2026-10-20T18:49:02.992944+00:00"
     }
   ]
 }

@@ -15,8 +15,11 @@ class ToolExecutor:
     """Safely executes registered tools with policy enforcement and retry handling."""
 
     def __init__(self, registry: Optional[ToolRegistry] = None, policy: Optional[ToolPolicy] = None):
-        self.registry = registry or ToolRegistry()
-        self.policy = policy or ToolPolicy()
+        self.policy = policy or getattr(registry, "policy", None) or ToolPolicy()
+        self.registry = registry or ToolRegistry(policy=self.policy)
+
+        # Keep registry handlers and executor checks on the same policy.
+        self.registry.policy = self.policy
 
     def execute_tool(
         self,
@@ -48,9 +51,13 @@ class ToolExecutor:
                     return res
                 return ExecutionResult.completed(data=res, duration=duration)
             except Exception as e:
+                # Do not retry arbitrary tool handlers: they may have
+                # partially completed a write, delete, or external action.
                 last_error = str(e)
-                if attempt <= max_retries:
-                    time.sleep(0.05 * attempt)
+                break
 
         duration = time.perf_counter() - start_time
-        return ExecutionResult.failed(f"Tool '{tool_name}' failed after {max_retries+1} attempts: {last_error}", duration=duration)
+        return ExecutionResult.failed(
+            f"Tool '{tool_name}' failed during execution: {last_error}",
+            duration=duration,
+        )

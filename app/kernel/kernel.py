@@ -67,13 +67,23 @@ class AutonomousExecutionKernel:
                 context.mark_started(node_id)
                 res = self.dispatcher.dispatch(node, context)
                 if res.success:
-                    context.mark_completed(node_id, data=res.data)
-                    self.history.record(node_id, res)
+                    context.mark_completed(node_id, result=res.data)
+                    self.history.record(
+                        "NODE_COMPLETED",
+                        run_id=context.run_id,
+                        node_id=node_id,
+                        payload={"success": True, "data": res.data},
+                    )
                     if self.checkpoint_manager:
                         self.checkpoint_manager.create(node_id, {"context": context.to_dict(), "graph": graph.to_dict()})
                 else:
                     context.mark_failed(node_id, error=res.message)
-                    self.history.record(node_id, res)
+                    self.history.record(
+                        "NODE_FAILED",
+                        run_id=context.run_id,
+                        node_id=node_id,
+                        payload={"success": False, "message": res.message},
+                    )
                     can_retry = scheduler.retry_or_fail(context, node)
                     if not can_retry:
                         context.state_machine.transition(ExecutionState.FAILED)

@@ -85,7 +85,8 @@ class HindiHinglishProcessor:
     ]
 
     HELP_PATTERNS = [
-        r"\b(help|madad|kaise|how|कैसे|मदद|सहायता)\b",
+        r"\b(help|madad|kaise|कैसे|मदद|सहायता)\b",
+        r"\bhow\s+(to|do|can|should|would)\b",
     ]
 
     EXIT_PATTERNS = [
@@ -193,7 +194,7 @@ class HindiHinglishProcessor:
     DOMAIN_PATTERNS = {
         "hospital": [
             "hospital", "clinic", "patient", "doctor", "medical", "healthcare",
-            "appointment", "pharmacy", "hospital", "clinic", "patient", "doctor",
+            "appointment", "pharmacy",
             "अस्पताल", "क्लिनिक", "डॉक्टर", "मेडिकल", "हेल्थकेयर", "रोगी",
             "aspataal", "clinic", "doctor", "medical", "healthcare", "rogi",
         ],

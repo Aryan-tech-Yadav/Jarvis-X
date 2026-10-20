@@ -73,8 +73,8 @@ class PermissionManager:
         if matching_rule and matching_rule.auto_approve:
             return PermissionResult(allowed=True, reason="Auto-approved by rule", rule=matching_rule)
 
-        if self.auto_approve:
-            return PermissionResult(allowed=True, reason="Auto-approve enabled", requires_approval=True)
+        # Global auto-approval must never bypass dangerous permissions.
+        # Dangerous operations require an explicit matching rule or approval callback.
 
         for callback in self._approval_callbacks:
             try:

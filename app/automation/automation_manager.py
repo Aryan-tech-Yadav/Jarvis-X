@@ -1,7 +1,8 @@
 import subprocess
 import time
+import webbrowser
 
-#from app.core.logger import Logger
+from app.core.logger import Logger
 from app.automation.application import ApplicationManager
 from app.automation.website import WebsiteManager
 from app.automation.folder import FolderManager
@@ -9,31 +10,35 @@ from app.automation.media import MediaManager
 
 
 class AutomationManager:
-    
+    """Facade for all desktop automation sub-systems.
+
+    Delegates to specialized managers:
+      - ApplicationManager: open/close desktop apps
+      - WebsiteManager: open URLs in the browser
+      - FolderManager: open file-explorer folders
+      - MediaManager: play local media
+    """
+
     def __init__(self):
-        
         self.application = ApplicationManager()
-        
         self.website = WebsiteManager()
-        
         self.folder = FolderManager()
-        
-        self.media = MediaManager()               
-        
-    def open_application(self, app):
-        
+        self.media = MediaManager()
+
+    def open_application(self, app: str) -> str:
+        """Open a desktop application by name."""
         return self.application.open(app)
-    
-    def open_Website(self, website):
-        
+
+    def open_website(self, website: str) -> str:
+        """Open a website in the default browser."""
         return self.website.open(website)
-    
-    def open_folder(self, folder):
-        
+
+    def open_folder(self, folder: str) -> str:
+        """Open a folder in the file explorer."""
         return self.folder.open(folder)
-    
-    def open_music(self):
-        
+
+    def open_music(self) -> str:
+        """Play music using the default media player."""
         return self.media.play_music()
 
     def play_spotify(self, song_name: str = ""):

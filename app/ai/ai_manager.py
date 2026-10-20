@@ -16,11 +16,13 @@ class AIManager:
         })
         
         
-    def ask(self, prompt):
+    def ask(self, prompt, **kwargs):
         
         self.chat.add_user(prompt)
         
-        answer = self.router.ask(prompt, messages=self.chat.get_messages())
+        answer = self.router.ask(
+            prompt, messages=self.chat.get_messages(), **kwargs
+        )
         
         self.chat.add_assistant(answer)
         

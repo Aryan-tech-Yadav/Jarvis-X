@@ -4,7 +4,7 @@ class FolderManager:
     
     def __init__(self):
         
-        self.folder = {
+        self.folders = {
             
             "downloads" : os.path.expanduser("~/Downloads"),
             

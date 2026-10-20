@@ -14,6 +14,7 @@ from app.core.logger import Logger
 class TestingAgent(BaseAgent):
     """Generates and runs tests for the project."""
 
+    __test__ = False  # Prevent pytest from collecting this agent as a test suite
     agent_id = "testing"
     capabilities = ("testing", "test", "qa", "pytest", "coverage", "validation")
 
@@ -22,13 +23,28 @@ class TestingAgent(BaseAgent):
 
     def run(self, context) -> Dict[str, Any]:
         if isinstance(context, dict):
-            context = ProjectContext(**{k: v for k, v in context.items() if k in ProjectContext.__dataclass_fields__})
+            context = ProjectContext(**{
+                k: v for k, v in context.items()
+                if k in ProjectContext.__dataclass_fields__
+            })
 
-        project_path = context.project_path or ""
+        project_path = getattr(context, "project_path", "") or ""
+
+        if hasattr(context, "shared_notes"):
+            context.shared_notes["testing"] = {
+                "status": "started",
+                "goal": getattr(context, "goal", ""),
+            }
+
         if not project_path or not os.path.isdir(project_path):
             context.add_log("No project path available, skipping tests")
             context.add_completed_task("testing")
             context.set_metric("skipped", True)
+            if hasattr(context, "shared_notes"):
+                context.shared_notes["testing"] = {
+                    "status": "skipped",
+                    "reason": "No project path",
+                }
             return {
                 "success": True,
                 "output": {"skipped": True, "reason": "No project path"},
@@ -39,7 +55,6 @@ class TestingAgent(BaseAgent):
         context.current_task = "testing"
         context.add_log("Starting test execution")
 
-        # Discover test files
         test_files = self._discover_tests(project_path)
         source_files = self._discover_source_files(project_path)
 
@@ -47,22 +62,24 @@ class TestingAgent(BaseAgent):
             context.add_log("No source files found, skipping test generation")
             context.add_completed_task("testing")
             context.set_metric("skipped", True)
+            if hasattr(context, "shared_notes"):
+                context.shared_notes["testing"] = {
+                    "status": "skipped",
+                    "reason": "No source files",
+                }
             return {
                 "success": True,
                 "output": {"skipped": True, "reason": "No source files"},
                 "context": context,
             }
 
-        # Generate tests if none exist
         if not test_files:
             context.add_log("No tests found, generating basic tests")
             generated = self._generate_basic_tests(source_files, project_path)
             test_files.extend(generated)
 
-        # Run tests
         test_results = self._run_tests(project_path, test_files)
 
-        # Update context
         context.add_completed_task("testing")
         context.set_metric("test_files", len(test_files))
         context.set_metric("test_results", test_results)
@@ -83,7 +100,16 @@ class TestingAgent(BaseAgent):
             "details": test_results.get("details", []),
         }
 
-        context.add_log(f"Tests: {passed}/{total} passed, {test_results.get('coverage', 0)}% coverage")
+        context.add_log(
+            f"Tests: {passed}/{total} passed, "
+            f"{test_results.get('coverage', 0)}% coverage"
+        )
+
+        if hasattr(context, "shared_notes"):
+            context.shared_notes["testing"] = {
+                "status": "completed",
+                "output": output,
+            }
 
         if failed > 0:
             Logger.warning(f"[TestingAgent] {failed} tests failed")
@@ -98,9 +124,9 @@ class TestingAgent(BaseAgent):
         for root, dirs, files in os.walk(project_path):
             dirs[:] = [d for d in dirs if d not in {".git", ".venv", "__pycache__", "node_modules"}]
             for filename in files:
-                if filename.startswith("test_") and filename.endswith(".py"):
-                    test_files.append(os.path.join(root, filename))
-                elif "tests" in root and filename.endswith(".py"):
+                if filename in {"__init__.py", "conftest.py"}:
+                    continue
+                if (filename.startswith("test_") or filename.endswith("_test.py")) and filename.endswith(".py"):
                     test_files.append(os.path.join(root, filename))
         return test_files
 

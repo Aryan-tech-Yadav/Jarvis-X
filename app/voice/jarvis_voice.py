@@ -6,6 +6,7 @@ Legacy wrapper around VoiceSessionManager for backward compatibility.
 from __future__ import annotations
 
 import os
+import platform
 import time
 import threading
 from typing import Optional, Callable
@@ -35,6 +36,9 @@ class JarvisVoice:
         self._on_command: Optional[Callable] = None
         self._session_manager: Optional[VoiceSessionManager] = None
         self._available = False
+        self._speaker = None
+        self._recorder = None
+        self._transcriber = None
         self._init_voice()
 
     def _init_voice(self):
@@ -52,6 +56,9 @@ class JarvisVoice:
                 )
 
             self._available = self._session_manager.is_available()
+            self._speaker = getattr(
+                self._session_manager.tts_manager, "_speaker", None
+            )
             if self._available:
                 Logger.success("[JarvisVoice] Professional voice system initialized")
             else:
@@ -74,6 +81,31 @@ class JarvisVoice:
         if self._session_manager:
             self._session_manager.set_callbacks(on_transcript=callback, on_response=callback)
 
+    def _configure_jarvis_voice(self):
+        """Configure voice preferences when a compatible speaker is available."""
+        speaker = self._speaker
+        if speaker is None:
+            return
+
+        try:
+            voices = speaker.getProperty("voices")
+            if voices:
+                # Keep the system's default voice unless a preferred voice is known.
+                speaker.setProperty("voice", getattr(voices[0], "id", voices[0]))
+        except Exception as exc:
+            Logger.warning(f"[JarvisVoice] Voice configuration skipped: {exc}")
+
+    def _get_legacy_speaker(self):
+        """Return the legacy speaker, or the current TTS manager's speaker."""
+        if self._speaker is not None:
+            return self._speaker
+
+        manager = self._session_manager
+        if manager is not None:
+            return getattr(getattr(manager, "tts_manager", None), "_speaker", None)
+
+        return None
+
     def speak(self, text: str, interrupt: bool = True):
         """Speak text using professional TTS with interruption support.
 
@@ -85,6 +117,18 @@ class JarvisVoice:
             return
 
         print(f"Jarvis: {text}")
+
+        # Preserve the legacy pyttsx3-style speaker API when explicitly set.
+        speaker = self._speaker
+        if speaker is not None:
+            try:
+                speaker.say(text)
+                run_and_wait = getattr(speaker, "runAndWait", None)
+                if callable(run_and_wait):
+                    run_and_wait()
+                return
+            except Exception as exc:
+                Logger.warning(f"[JarvisVoice] Legacy speaker error: {exc}")
 
         if self._session_manager:
             try:
@@ -176,18 +220,34 @@ class JarvisVoice:
             pass
 
     def set_voice_speed(self, rate: int):
-        """Set TTS speed."""
+        """Set TTS speed through the current manager and legacy speaker."""
         if self._session_manager:
             try:
                 self._session_manager.tts_manager.set_rate(rate)
             except Exception:
                 pass
 
+        speaker = self._get_legacy_speaker()
+        if speaker is not None:
+            try:
+                speaker.setProperty("rate", rate)
+            except Exception:
+                pass
+
     def set_voice_volume(self, volume: float):
         """Set TTS volume (0.0 to 1.0)."""
+        volume = max(0.0, min(1.0, volume))
+
         if self._session_manager:
             try:
                 self._session_manager.tts_manager.set_volume(volume)
+            except Exception:
+                pass
+
+        speaker = self._get_legacy_speaker()
+        if speaker is not None:
+            try:
+                speaker.setProperty("volume", volume)
             except Exception:
                 pass
 

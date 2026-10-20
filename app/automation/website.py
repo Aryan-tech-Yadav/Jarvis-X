@@ -12,8 +12,6 @@ class WebsiteManager:
             "twitter" : "https://www.twitter.com",
             "x" : "https://www.x.com",
             "github" : "https://www.github.com",
-            "chatgpt" : "https://www.chatgpt.com",
-            "gmail" : "https://www.gmail.com",
             "linkedin" : "https://www.linkedin.com",
             "reddit" : "https://www.reddit.com",
             "whatsapp" : "https://web.whatsapp.com",

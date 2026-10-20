@@ -11,9 +11,25 @@ from __future__ import annotations
 
 import json
 import os
+import hashlib
+import uuid
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+
+@dataclass
+class ManagedArtifact:
+    """Metadata and content for a managed project artifact."""
+
+    artifact_id: str
+    name: str
+    artifact_type: str
+    content: str
+    created_by: str = "unknown"
+    tags: List[str] = field(default_factory=list)
+    checksum: str = ""
 
 
 class ArtifactManager:
@@ -36,6 +52,49 @@ class ArtifactManager:
     def __init__(self, base_workspace: str = "workspace"):
         self.base_workspace = Path(base_workspace).resolve()
         self.base_workspace.mkdir(parents=True, exist_ok=True)
+        self._artifacts: List[ManagedArtifact] = []
+
+    def add(
+        self,
+        name: str,
+        artifact_type: str,
+        content: Any,
+        created_by: str = "unknown",
+        tags: Optional[List[str]] = None,
+    ) -> ManagedArtifact:
+        """Register an artifact and return its metadata.
+
+        Preserves compatibility with callers that use the add/get_by_type API.
+        """
+        if isinstance(content, bytes):
+            raw_content = content
+            stored_content = content.decode("utf-8", errors="replace")
+        elif isinstance(content, str):
+            stored_content = content
+            raw_content = content.encode("utf-8")
+        else:
+            stored_content = json.dumps(content, indent=2, default=str)
+            raw_content = stored_content.encode("utf-8")
+
+        artifact = ManagedArtifact(
+            artifact_id=str(uuid.uuid4()),
+            name=name,
+            artifact_type=artifact_type,
+            content=stored_content,
+            created_by=created_by,
+            tags=list(tags or []),
+            checksum=hashlib.sha256(raw_content).hexdigest(),
+        )
+        self._artifacts.append(artifact)
+        return artifact
+
+    def get_by_type(self, artifact_type: str) -> List[ManagedArtifact]:
+        """Return registered artifacts matching the requested type."""
+        return [
+            artifact
+            for artifact in self._artifacts
+            if artifact.artifact_type == artifact_type
+        ]
 
     def create_project_structure(self, project_name: str) -> Path:
         """Create standard project directory structure.

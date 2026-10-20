@@ -16,7 +16,7 @@ class EntityExtractor:
         "calc": "calculator",
         
         "notepad": "notepad",
-        "task manager": "task manger"
+        "task manager": "taskmgr"
         
     }
     

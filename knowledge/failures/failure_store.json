@@ -9,7 +9,7 @@
     "code_diff": "",
     "success": true,
     "repair_time_sec": 0.0,
-    "occurrences": 9,
+    "occurrences": 58,
     "domain": "general",
     "failing_symbol": "",
     "created_at": "2026-08-27T13:21:37.084365+00:00"

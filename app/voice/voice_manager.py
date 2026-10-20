@@ -62,7 +62,7 @@ class VoiceManager:
 
         try:
             audio_path = self.recorder.record(timeout=timeout)
-            if not audio_path or not audio_path:
+            if not audio_path:
                 return None
 
             text = self.transcriber.transcribe(audio_path)

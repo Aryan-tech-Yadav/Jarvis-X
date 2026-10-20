@@ -68,32 +68,69 @@ class ToolSelector:
                 "permissions": meta.permissions or [],
             }
 
-    def select(self, intent: str, user_input: str = "", plan: List[str] = None,
-               action: Optional[str] = None):
-        """Select tools for a given intent and user input.
+    def select(
+        self,
+        intent: str,
+        user_input: str = "",
+        plan: List[str] = None,
+        action: Optional[str] = None,
+    ):
+        """Select the best matching tool, respecting capability and priority."""
 
-        Args:
-            intent: Detected user intent
-            user_input: Raw user input
-            plan: Optional execution plan steps
+        if self.tool_registry is not None:
+            try:
+                tools = list(self.tool_registry.list())
+            except (AttributeError, TypeError):
+                tools = []
 
-        Returns:
-            List of tool names needed
-        """
-        if self.tool_registry is not None and (action is not None or not user_input):
-            matches = (
-                self.tool_registry.find_by_action(action)
-                if action is not None
-                else self.tool_registry.search(intent)
-            )
-            return matches[0] if matches else None
+            query = f"{intent or ''} {user_input or ''}".lower()
+            query_terms = set(query.replace("-", " ").replace("_", " ").split())
+            requested_action = action.lower() if action else None
+            ranked = []
 
-        # First, try rule-based selection for known intents
+            for tool in tools:
+                meta = getattr(tool, "metadata", tool)
+
+                name = str(getattr(meta, "name", ""))
+                description = str(getattr(meta, "description", ""))
+                actions = list(getattr(meta, "actions", []) or [])
+                tags = list(getattr(meta, "tags", []) or [])
+                priority = getattr(meta, "priority", 0) or 0
+
+                normalized_actions = [str(a).lower() for a in actions]
+
+                if requested_action and requested_action not in normalized_actions:
+                    continue
+
+                searchable = " ".join(
+                    [name, description] + [str(x) for x in actions + tags]
+                ).lower().replace("-", " ").replace("_", " ")
+
+                searchable_terms = set(searchable.split())
+                overlap = len(query_terms & searchable_terms)
+
+                # Prefer relevant tools, then use priority to break ties.
+                score = overlap * 10 + float(priority) * 0.1
+
+                if requested_action:
+                    score += 100
+
+                if name.lower().replace("-", " ") in query:
+                    score += 5
+
+                if overlap or requested_action:
+                    ranked.append((score, tool))
+
+            if ranked:
+                return max(ranked, key=lambda item: item[0])[1]
+
+            # Preserve the registry API: no matching tool means None.
+            return None
+
         rule_based = self._rule_based_selection(intent, user_input)
         if rule_based:
             return rule_based
 
-        # Fallback to LLM-based selection
         if self.ai_router:
             try:
                 return self._llm_based_selection(intent, user_input, plan)

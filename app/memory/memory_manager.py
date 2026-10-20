@@ -57,7 +57,7 @@ class MemoryManager:
         cleaner = MemoryCleaner(max_age_seconds=max_age_seconds, max_entries=max_entries)
         kept = cleaner.clean(self.index.entries())
         kept_ids = {entry["id"] for entry in kept}
-        for entry in self.index.entries():
+        for entry in list(self.index.entries()):
             if entry["id"] not in kept_ids:
                 self.index.remove(entry["id"])
         return kept

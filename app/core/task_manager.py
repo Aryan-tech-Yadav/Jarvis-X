@@ -47,15 +47,15 @@ class TaskManager:
         elif intent == "WIKIPEDIA":
             return self.internet.wikipedia(entity)
         
-        elif intent == "NEWS":
-            return self.internet.get_news()
-        
+
         elif intent == "CREATE_CODE":
             
             #Generate code
             code = self.generator.generate(command)
             
             #save
+            if entity is None:
+                entity = "generated_script"
             filename = entity.replace(" ","_") + ".py"
             path = self.files.save_python(filename, code)
             
@@ -131,7 +131,7 @@ class TaskManager:
                 
                 #name = entity.replace("my name is", "").strip()               
                 self.memory.save_memory(key, value)
-                return f"Okay Sir, I'll remember your{key.replace('_', ' ')}."
+                return f"Okay Sir, I'll remember your {key.replace('_', ' ')}."
             
             return "I couldn't understand what to remember."
         
@@ -156,4 +156,4 @@ class TaskManager:
             return "Shutting Down..."
                
         else:
-            return "Soory Sir, I don't know to do that yet."      
+            return "Sorry Sir, I don't know how to do that yet."      

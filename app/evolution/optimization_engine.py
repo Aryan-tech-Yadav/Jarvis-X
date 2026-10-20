@@ -16,9 +16,14 @@ class OptimizationEngine:
     ) -> List[EvolutionRecommendation]:
         recommendations: List[EvolutionRecommendation] = []
 
-        # 1. Slow Planning Check (planning > 30% of total runtime)
-        if metrics.total_time_sec > 0 and (metrics.planning_time_sec / metrics.total_time_sec) > 0.30:
-            gain = min(40.0, ((metrics.planning_time_sec / metrics.total_time_sec) - 0.20) * 100.0)
+        # 1. Slow Planning Check (absolute or relative planning bottleneck)
+        planning_ratio = (
+            metrics.planning_time_sec / metrics.total_time_sec
+            if metrics.total_time_sec > 0
+            else 0.0
+        )
+        if metrics.planning_time_sec > 30.0 or planning_ratio > 0.30:
+            gain = min(40.0, max(5.0, (planning_ratio - 0.20) * 100.0))
             recommendations.append(
                 EvolutionRecommendation(
                     title="Optimize Planner Graph Decomposition",

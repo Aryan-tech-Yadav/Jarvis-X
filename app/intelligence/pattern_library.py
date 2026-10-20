@@ -69,12 +69,13 @@ class PatternLibrary:
     def __init__(self, patterns_path: str = "data/pattern_library.json"):
         self.patterns_path = patterns_path
         self._patterns: Dict[str, EngineeringPattern] = {}
-        os.makedirs(os.path.dirname(patterns_path) or ".", exist_ok=True)
-        self._load()
+        if patterns_path != ":memory:":
+            os.makedirs(os.path.dirname(patterns_path) or ".", exist_ok=True)
+            self._load()
         self._seed_defaults()
 
     def _load(self):
-        if not os.path.exists(self.patterns_path):
+        if self.patterns_path == ":memory:" or not os.path.exists(self.patterns_path):
             return
         try:
             with open(self.patterns_path, "r", encoding="utf-8") as f:
@@ -88,6 +89,8 @@ class PatternLibrary:
             pass
 
     def _save(self):
+        if self.patterns_path == ":memory:":
+            return
         try:
             with open(self.patterns_path, "w", encoding="utf-8") as f:
                 json.dump([p.to_dict() for p in self._patterns.values()], f, indent=2, default=str)

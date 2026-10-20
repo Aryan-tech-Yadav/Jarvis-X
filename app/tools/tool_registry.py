@@ -94,17 +94,44 @@ class ToolRegistry:
 
     def execute(self, tool_name: str, action: Optional[str] = None,
                 context: Optional[Dict[str, Any]] = None, **kwargs) -> Dict[str, Any]:
-        """Execute a tool by name with optional permission check."""
+        """Execute a tool with fail-closed checks for dangerous permissions."""
         tool = self.get(tool_name)
         if tool is None:
             return {"success": False, "error": f"Tool not registered: {tool_name}"}
 
-        if self._permission_manager:
-            perm = self._permission_manager.check(
-                tool_name, action or "", tool.metadata.permissions or []
+        permissions = list(
+            getattr(getattr(tool, "metadata", None), "permissions", None) or []
+        )
+
+        if self._permission_manager is not None:
+            try:
+                perm = self._permission_manager.check(
+                    tool_name, action or "", permissions
+                )
+                if not perm.allowed:
+                    return {
+                        "success": False,
+                        "error": f"Permission denied: {perm.reason}",
+                    }
+            except Exception as exc:
+                return {
+                    "success": False,
+                    "error": f"Permission check failed; execution blocked: {exc}",
+                }
+        else:
+            from app.tools.permission_manager import PermissionManager
+
+            dangerous = (
+                set(permissions) & PermissionManager.DANGEROUS_PERMISSIONS
             )
-            if not perm.allowed:
-                return {"success": False, "error": f"Permission denied: {perm.reason}"}
+            if dangerous:
+                return {
+                    "success": False,
+                    "error": (
+                        "Permission manager unavailable; refusing dangerous "
+                        f"operation: {', '.join(sorted(dangerous))}"
+                    ),
+                }
 
         try:
             return tool.execute(action, context=context, **kwargs)

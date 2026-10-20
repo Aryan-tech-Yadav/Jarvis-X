@@ -23,6 +23,15 @@ class AutomationTool(BaseTool):
         tags=["automation", "script", "schedule", "notify"],
     )
 
+    DEFAULT_TIMEOUT = 30
+    MAX_OUTPUT_CHARS = 20000
+
+    def _truncate(self, value):
+        value = value or ""
+        if len(value) > self.MAX_OUTPUT_CHARS:
+            return value[:self.MAX_OUTPUT_CHARS] + "\n...[output truncated]"
+        return value
+
     def run(self, action: str = "", **kwargs) -> dict:
         if action not in self.metadata.actions:
             return ToolResult.fail(f"Unsupported action: {action}").to_dict()
@@ -49,17 +58,43 @@ class AutomationTool(BaseTool):
         script = kwargs.get("script") or kwargs.get("command")
         if not script:
             return ToolResult.fail("Script path or command is required").to_dict()
+
         cwd = kwargs.get("cwd") or kwargs.get("base_path") or os.getcwd()
-        if os.path.isfile(script):
-            cmd = [script]
-        elif isinstance(script, str):
-            cmd = script if isinstance(script, list) else script.split()
-        else:
+        if not isinstance(cwd, str) or not os.path.isdir(cwd):
+            return ToolResult.fail("Working directory must be an existing directory").to_dict()
+
+        if isinstance(script, str):
+            cmd = [script] if os.path.isfile(script) else script.split()
+        elif isinstance(script, (list, tuple)) and script:
+            if not all(isinstance(arg, str) and arg for arg in script):
+                return ToolResult.fail("Script arguments must be non-empty strings").to_dict()
             cmd = list(script)
-        result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+        else:
+            return ToolResult.fail("Script must be a path or a non-empty command").to_dict()
+
+        try:
+            timeout = float(kwargs.get("timeout", self.DEFAULT_TIMEOUT))
+            if not 1 <= timeout <= 300:
+                return ToolResult.fail("Timeout must be between 1 and 300 seconds").to_dict()
+
+            import tempfile
+            with tempfile.TemporaryFile(mode="w+t", encoding="utf-8") as stdout_file, \
+                 tempfile.TemporaryFile(mode="w+t", encoding="utf-8") as stderr_file:
+                result = subprocess.run(
+                    cmd, cwd=cwd, stdout=stdout_file, stderr=stderr_file, text=True,
+                    timeout=timeout, shell=False, check=False,
+                )
+                stdout_file.seek(0)
+                stderr_file.seek(0)
+                output = self._truncate(stdout_file.read(self.MAX_OUTPUT_CHARS + 1).strip())
+                error = self._truncate(stderr_file.read(self.MAX_OUTPUT_CHARS + 1).strip())
+        except subprocess.TimeoutExpired:
+            return ToolResult.fail(f"Script timed out after {timeout:g} seconds").to_dict()
+        except (OSError, ValueError, TypeError) as exc:
+            return ToolResult.fail(str(exc)).to_dict()
         if result.returncode == 0:
-            return ToolResult.ok(output=result.stdout.strip()).to_dict()
-        return ToolResult.fail(result.stderr.strip()).to_dict()
+            return ToolResult.ok(output=output).to_dict()
+        return ToolResult.fail(error or "Script failed", output=output).to_dict()
 
     def _schedule(self, kwargs) -> dict:
         task = kwargs.get("task")

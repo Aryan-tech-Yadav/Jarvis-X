@@ -1,0 +1,19 @@
+# ==============================================================================
+# Jarvis-X Development, Testing & Security Dependencies
+# Install with: pip install -r requirements-dev.txt
+# ==============================================================================
+
+-r requirements.txt
+
+# Testing & Invariants
+pytest>=8.0.0
+pytest-cov>=4.1.0
+typeguard>=4.0.0
+
+# Code Quality & Formatting
+ruff>=0.3.0
+
+# Security Auditing
+bandit[toml]>=1.7.5
+pip-audit>=2.7.0
+

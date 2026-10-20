@@ -57,6 +57,8 @@ class TTSManager:
             self._init_edge_tts()
         elif self._engine == "piper":
             self._init_piper()
+        elif self._engine == "gtts":
+            self._init_gtts()
 
     def _select_engine(self) -> str:
         """Select best available TTS engine."""
@@ -116,6 +118,16 @@ class TTSManager:
             print("[TTS] Piper ready")
         except Exception as exc:
             print(f"[TTS] Piper init failed: {exc}")
+            self._engine = "system"
+
+    def _init_gtts(self):
+        """Initialize Google TTS."""
+        try:
+            from gtts import gTTS
+            self._gtts = gTTS
+            print("[TTS] gTTS ready")
+        except Exception as exc:
+            print(f"[TTS] gTTS init failed: {exc}")
             self._engine = "system"
 
     def speak(self, text: str, interrupt: bool = True):

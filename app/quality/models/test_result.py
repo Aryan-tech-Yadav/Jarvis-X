@@ -57,6 +57,7 @@ class CoverageResult:
 
 @dataclass
 class TestSuiteResult:
+    __test__ = False
     total_tests: int = 0
     passed: int = 0
     failed: int = 0

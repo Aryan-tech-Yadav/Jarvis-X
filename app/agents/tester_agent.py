@@ -9,6 +9,7 @@ from app.project.project_tester import ProjectTester
 class TesterAgent(BaseAgent):
     """Uses the existing project validator to report a normalized test result."""
 
+    __test__ = False  # Prevent pytest from collecting this agent as a test suite
     agent_id = "tester"
     capabilities = ("test", "testing", "validation", "validate")
 

@@ -97,23 +97,6 @@ class JarvisCLI:
         except Exception as exc:
             Logger.warning(f"[JarvisCLI] DashboardBackend init failed: {exc}")
 
-        try:
-            from app.runtime.core_runtime import CoreRuntime
-            if self.engineering_workflow and self.autonomous_executor:
-                self.core_runtime = CoreRuntime(
-                    workflow=self.engineering_workflow,
-                    executor=self.autonomous_executor,
-                    event_bus=self.event_bus,
-                    context=self.runtime_context,
-                    artifact_manager=self.artifact_manager,
-                    reflection_engine=self.reflection_engine,
-                    learning_engine=self.learning_engine,
-                    dashboard_backend=self.dashboard_backend,
-                )
-                Logger.success("[JarvisCLI] Core Runtime initialized")
-        except Exception as exc:
-            Logger.warning(f"[JarvisCLI] Core Runtime init failed: {exc}")
-
         # Brain Kernel (EIK)
         try:
             from app.brain.brain_kernel import BrainKernel
@@ -579,7 +562,7 @@ class JarvisCLI:
         if not website_name:
             print("Which website do you want to open?")
             return True
-        result = self.automation.open_Website(website_name)
+        result = self.automation.open_website(website_name)
         print(f"\nJarvis: {result}")
         return True
 

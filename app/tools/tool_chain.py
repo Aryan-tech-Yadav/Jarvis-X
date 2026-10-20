@@ -1,12 +1,4 @@
-"""Tool chaining for multi-step workflows.
-
-Example:
-    chain = ToolChain()
-    chain.add("git", "clone", repo="...")
-    chain.add("vscode", "open", path=".")
-    chain.add("python", "run", file_name="main.py")
-    chain.execute_all(registry)
-"""
+"""Tool chaining for multi-step workflows."""
 
 from __future__ import annotations
 
@@ -15,6 +7,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
 from app.tools.base_tool import BaseTool, ToolResult
+from app.tools.permission_manager import PermissionManager
 
 
 @dataclass
@@ -24,7 +17,7 @@ class ChainStep:
     tool_name: str
     action: str = ""
     params: Dict[str, Any] = field(default_factory=dict)
-    on_failure: str = "stop"  # stop | continue | retry
+    on_failure: str = "stop"
     max_retries: int = 0
 
     def to_dict(self) -> Dict[str, Any]:
@@ -60,15 +53,24 @@ class ChainResult:
 
 
 class ToolChain:
-    """Chain multiple tool executions together."""
+    """Chain multiple tool executions with permission enforcement."""
 
     def __init__(self, registry=None, permission_manager=None):
         self._steps: List[ChainStep] = []
         self.registry = registry
-        self.permission_manager = permission_manager
+        self.permission_manager = (
+            permission_manager
+            or getattr(registry, "_permission_manager", None)
+        )
 
-    def add(self, tool_name: str, action: str = "", params: Optional[Dict[str, Any]] = None,
-            on_failure: str = "stop", max_retries: int = 0) -> ChainStep:
+    def add(
+        self,
+        tool_name: str,
+        action: str = "",
+        params: Optional[Dict[str, Any]] = None,
+        on_failure: str = "stop",
+        max_retries: int = 0,
+    ) -> ChainStep:
         """Add a step to the chain."""
         step = ChainStep(
             tool_name=tool_name,
@@ -81,11 +83,15 @@ class ToolChain:
         return step
 
     def execute_all(self, registry=None) -> ChainResult:
-        """Execute all steps in the chain."""
+        """Execute chain steps after checking required permissions."""
         registry = registry or self.registry
         if registry is None:
-            return ChainResult(success=False, steps_executed=0, total_steps=len(self._steps),
-                               errors=["No tool registry provided"])
+            return ChainResult(
+                success=False,
+                steps_executed=0,
+                total_steps=len(self._steps),
+                errors=["No tool registry provided"],
+            )
 
         started = time.perf_counter()
         results: List[Dict[str, Any]] = []
@@ -94,39 +100,99 @@ class ToolChain:
 
         for step in self._steps:
             tool = registry.get(step.tool_name)
+
             if tool is None:
                 errors.append(f"Tool not found: {step.tool_name}")
                 if step.on_failure == "stop":
                     break
                 continue
 
-            if self.permission_manager:
-                perm = self.permission_manager.check(
-                    step.tool_name, step.action, getattr(tool, "permissions", [])
+            metadata = getattr(tool, "metadata", None)
+            permissions = list(getattr(metadata, "permissions", None) or [])
+
+            # Resolve a manager from the active registry if one was supplied
+            # to execute_all() rather than to the constructor.
+            manager = (
+                self.permission_manager
+                or getattr(registry, "_permission_manager", None)
+            )
+
+            if manager is not None:
+                try:
+                    permission_result = manager.check(
+                        step.tool_name, step.action, permissions
+                    )
+                    allowed = bool(
+                        getattr(permission_result, "allowed", False)
+                    )
+                    reason = getattr(
+                        permission_result, "reason", "Permission denied"
+                    )
+                except Exception as exc:
+                    allowed = False
+                    reason = f"Permission check failed: {exc}"
+
+                if not allowed:
+                    errors.append(
+                        f"Permission denied: {step.tool_name}."
+                        f"{step.action}: {reason}"
+                    )
+                    if step.on_failure == "stop":
+                        break
+                    continue
+            else:
+                dangerous_permissions = (
+                    set(permissions)
+                    & PermissionManager.DANGEROUS_PERMISSIONS
                 )
-                if not perm.allowed:
-                    errors.append(f"Permission denied: {step.tool_name}.{step.action}: {perm.reason}")
+                if dangerous_permissions:
+                    dangerous = ", ".join(sorted(dangerous_permissions))
+                    errors.append(
+                        "Permission manager unavailable; refusing "
+                        f"dangerous operation {step.tool_name}."
+                        f"{step.action}: {dangerous}"
+                    )
                     if step.on_failure == "stop":
                         break
                     continue
 
+            # Retry only when explicitly requested. Each retry may repeat
+            # side effects, so callers should opt in carefully.
             attempt = 0
             last_result = None
+
             while attempt <= max(step.max_retries, 0):
                 attempt += 1
                 try:
-                    last_result = tool.execute(step.action, context=step.params, **step.params)
-                    if isinstance(last_result, dict) and last_result.get("success"):
-                        break
+                    last_result = tool.execute(
+                        step.action,
+                        context=step.params,
+                        **step.params,
+                    )
                 except Exception as exc:
                     last_result = {"success": False, "error": str(exc)}
 
-            if isinstance(last_result, dict) and last_result.get("success"):
+                if (
+                    isinstance(last_result, dict)
+                    and last_result.get("success")
+                ):
+                    break
+
+            if (
+                isinstance(last_result, dict)
+                and last_result.get("success")
+            ):
                 results.append(last_result)
                 executed += 1
             else:
-                error_msg = (last_result or {}).get("error", "Unknown error") if isinstance(last_result, dict) else "Unknown error"
-                errors.append(f"{step.tool_name}.{step.action}: {error_msg}")
+                if isinstance(last_result, dict):
+                    error_msg = last_result.get("error", "Unknown error")
+                else:
+                    error_msg = "Unknown error"
+
+                errors.append(
+                    f"{step.tool_name}.{step.action}: {error_msg}"
+                )
                 if step.on_failure == "stop":
                     break
 
@@ -140,7 +206,7 @@ class ToolChain:
         )
 
     def steps(self) -> List[Dict[str, Any]]:
-        return [s.to_dict() for s in self._steps]
+        return [step.to_dict() for step in self._steps]
 
     def clear(self):
         self._steps.clear()

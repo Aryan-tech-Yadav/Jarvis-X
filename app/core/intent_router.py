@@ -11,6 +11,18 @@ class IntentRouter:
 
         text = TextNormalizer.normalize(text)
 
+        # Rule-based check for news — must be checked BEFORE the loop
+        if (
+            "news" in text
+            or "headlines" in text
+            or "breaking news" in text
+        ):
+            return {
+                "intent": "NEWS",
+                "confidence": 0.98,
+                "source": "RULE"
+            }
+
         best_intent = "UNKNOWN"
         best_score = 0
 
@@ -29,18 +41,6 @@ class IntentRouter:
                 # startswith
                 if text.startswith(phrase):
                     score = 0.95
-                    
-                if (
-                     "news" in text
-                    or "headlines" in text
-                    or "breaking news" in text
-                ):
-                     return {
-                        "intent": "NEWS",
-                        "confidence": 0.98,
-                        "source": "RULE"
-                    }
-
                 else:
                     score = FuzzyMatcher.similarity(text, phrase)
 

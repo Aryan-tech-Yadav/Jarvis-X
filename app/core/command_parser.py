@@ -26,7 +26,7 @@ class CommandParser:
                     temp.extend(command.split(" then "))
                     
                 else:
-                    temp.extend(command.split(","))
+                    temp.extend(command.split(separator))
                 
             commands = temp
         commands = [cmd.strip() for cmd in commands if cmd.strip()]

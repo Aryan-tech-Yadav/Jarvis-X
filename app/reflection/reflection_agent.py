@@ -21,7 +21,7 @@ class ReflectionAgent:
         )
         try:
             result = json.loads(clean_json(self.ai.ask(prompt)))
-        except (json.JSONDecodeError, TypeError, AttributeError):
+        except Exception:
             return self._fallback()
 
         if not isinstance(result, dict):

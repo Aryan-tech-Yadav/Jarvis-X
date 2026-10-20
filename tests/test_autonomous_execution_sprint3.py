@@ -108,6 +108,55 @@ class TestQAOrchestrator(unittest.TestCase):
             self.assertTrue(report.success or len(report.cycles) > 0)
 
 
+    @patch("app.engineering.qa_orchestrator.StaticAnalyzer")
+    @patch("app.engineering.qa_orchestrator.TestEngine")
+    def test_failed_tests_must_not_report_success(self, mock_test, mock_static):
+        analyzer = MagicMock()
+        analyzer.scan_directory.return_value = MagicMock(issues=[])
+        mock_static.return_value = analyzer
+
+        test_engine = MagicMock()
+        test_engine.run.return_value = MagicMock(success=False, passed=False)
+        mock_test.return_value = test_engine
+
+        qa = QAOrchestrator(quality_threshold=80.0, max_cycles=1)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            report = qa.run(tmpdir)
+
+        self.assertTrue(report.static_analysis_passed)
+        self.assertFalse(report.tests_passed)
+        self.assertFalse(report.success)
+
+    @patch("app.engineering.qa_orchestrator.StaticAnalyzer")
+    @patch("app.engineering.qa_orchestrator.TestEngine")
+    def test_static_analysis_failure_must_not_report_success(
+        self, mock_test, mock_static
+    ):
+        analyzer = MagicMock()
+        analyzer.scan_directory.return_value = MagicMock(
+            issues=[MagicMock(
+                category="test",
+                severity="high",
+                message="intentional test issue",
+                file_path="example.py",
+                line_number=1,
+            )]
+        )
+        mock_static.return_value = analyzer
+
+        test_engine = MagicMock()
+        test_engine.run.return_value = MagicMock(success=True, passed=True)
+        mock_test.return_value = test_engine
+
+        qa = QAOrchestrator(quality_threshold=80.0, max_cycles=1)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            report = qa.run(tmpdir)
+
+        self.assertFalse(report.static_analysis_passed)
+        self.assertTrue(report.tests_passed)
+        self.assertFalse(report.success)
+
+
 class TestAutonomousExecutor(unittest.TestCase):
     def test_executor_initialization(self):
         executor = AutonomousExecutor()

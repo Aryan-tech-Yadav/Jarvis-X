@@ -154,10 +154,12 @@ class AutonomousLearningEngine:
         knowledge_summary = self.knowledge_sync.get_knowledge_summary()
         version_summary = self.version_engine.get_version_trend_summary()
 
+        has_experience = stats.get("total_projects", 0) > 0
+
         evo_score = EvolutionScoreCalculator.compute_score(
-            planning_score=stats.get("average_planning_score", 95.0),
-            execution_score=stats.get("average_execution_score", 92.0),
-            qa_score=stats.get("average_quality_score", 90.0),
+            planning_score=stats.get("average_planning_score", 95.0) if has_experience else 95.0,
+            execution_score=stats.get("average_execution_score", 92.0) if has_experience else 92.0,
+            qa_score=stats.get("average_quality_score", 90.0) if has_experience else 90.0,
             repair_score=92.0,
             performance_score=90.0,
             learning_score=97.0,

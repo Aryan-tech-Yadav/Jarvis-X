@@ -1,0 +1,96 @@
+# ==============================================================================
+# Jarvis-X Git Ignore Policy
+# ==============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# C extensions & builds
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+.venv*/
+venv/
+venv*/
+ENV/
+env/
+env*/
+
+# Testing & Quality
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor / IDE configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jarvis-X Runtime Persistent & Large Memory Data
+/data/memory.json
+/data/metrics.json
+/data/audio.wav
+/data/analytics/*.json
+/data/reflections/*.json
+/data/dashboard/*.json
+!data/templates/
+!data/knowledge/
+
+# Jarvis-X Checkpoints and Execution State
+.jarvis/
+.sandboxes/
+
+# Local reports & artifacts
+reports/*.json
+reports/*.md
+reports/*.mmd
+artifacts/
+
+# Generated Workspace Project outputs (preserve directory structure)
+workspace/*/
+!workspace/.gitkeep
+
+# Temporary editor and backup files
+*.bak
+*.pre_*_fix.bak
+*.log

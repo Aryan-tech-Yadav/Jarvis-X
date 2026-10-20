@@ -19,7 +19,7 @@ class GoalPlanner:
         try:
             data = json.loads(clean_json(self.ai.ask(prompt)))
             return ExecutionPlan.from_dict(data)
-        except (json.JSONDecodeError, TypeError, AttributeError, ValueError):
+        except Exception:
             return self._fallback_plan(goal)
 
     def _fallback_plan(self, goal):

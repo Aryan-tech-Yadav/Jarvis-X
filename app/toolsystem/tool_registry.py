@@ -10,13 +10,15 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from app.core.results import ExecutionResult
 from .tool_capability import ToolCapability, ToolRisk
+from .tool_policy import ToolPolicy
 
 
 class ToolRegistry:
     """Registry managing available engineering tools and their capabilities."""
 
-    def __init__(self):
+    def __init__(self, policy: Optional[ToolPolicy] = None):
         self._tools: Dict[str, Dict[str, Any]] = {}
+        self.policy = policy or ToolPolicy()
         self._register_builtins()
 
     def register_tool(self, name: str, capability: ToolCapability, handler: Callable):
@@ -112,18 +114,50 @@ class ToolRegistry:
         )
 
     def _handle_filesystem(self, action: str, path: str, content: Optional[str] = None) -> ExecutionResult:
-        p = Path(path)
-        if action == "write":
-            p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_text(content or "", encoding="utf-8")
-            return ExecutionResult.completed(data={"path": str(p), "bytes": len(content or "")})
-        elif action == "read":
-            if not p.exists():
-                return ExecutionResult.failed(f"File not found: {path}")
-            return ExecutionResult.completed(data={"content": p.read_text(encoding="utf-8")})
-        elif action == "exists":
-            return ExecutionResult.completed(data={"exists": p.exists()})
-        return ExecutionResult.failed(f"Unknown filesystem action: {action}")
+        if not isinstance(path, str) or not path.strip():
+            return ExecutionResult.failed("A valid filesystem path is required.")
+
+        try:
+            p = Path(path).expanduser()
+            if not p.is_absolute():
+                p = self.policy.workspace_root / p
+
+            # Resolve symlinks and traversal before performing any operation.
+            if action == "write":
+                parent = p.parent.resolve(strict=True)
+                p = parent / p.name
+            else:
+                p = p.resolve(strict=True)
+
+            if not self.policy.validate_path_sandbox(str(p)):
+                return ExecutionResult.failed(
+                    "Filesystem access is restricted to the configured workspace."
+                )
+
+            if action == "write":
+                if p.exists() and not p.is_file():
+                    return ExecutionResult.failed("Write target must be a regular file.")
+                if not isinstance(content, (str, type(None))):
+                    return ExecutionResult.failed("File content must be text.")
+                p.write_text(content or "", encoding="utf-8")
+                return ExecutionResult.completed(
+                    data={"path": str(p), "bytes": len(content or "")}
+                )
+
+            if action == "read":
+                if not p.is_file():
+                    return ExecutionResult.failed(f"File not found: {path}")
+                return ExecutionResult.completed(
+                    data={"content": p.read_text(encoding="utf-8")}
+                )
+
+            if action == "exists":
+                return ExecutionResult.completed(data={"exists": p.exists()})
+
+            return ExecutionResult.failed(f"Unknown filesystem action: {action}")
+
+        except (OSError, RuntimeError, ValueError, TypeError) as exc:
+            return ExecutionResult.failed(f"Filesystem operation failed: {exc}")
 
     def _handle_git(self, command: str, repo_path: str = ".") -> ExecutionResult:
         return ExecutionResult.completed(data={"command": command, "output": f"Simulated git {command} success"})
@@ -138,4 +172,13 @@ class ToolRegistry:
         return ExecutionResult.completed(data={"action": action, "schema_valid": True})
 
     def _handle_terminal(self, command: str) -> ExecutionResult:
-        return ExecutionResult.completed(data={"command": command, "exit_code": 0})
+        # Reject unsafe commands before reporting a simulated result.
+        if not self.policy.is_command_safe(command):
+            return ExecutionResult.failed(
+                "Terminal command rejected by security policy."
+            )
+
+        # This registry handler simulates execution; it does not run a shell.
+        return ExecutionResult.completed(
+            data={"command": command, "exit_code": 0, "simulated": True}
+        )

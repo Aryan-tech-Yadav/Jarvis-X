@@ -148,7 +148,7 @@ class QAOrchestrator:
             )
 
             # Check if quality threshold met
-            if cycle_result.quality_score >= self.quality_threshold and cycle_result.static_analysis_passed:
+            if (cycle_result.quality_score >= self.quality_threshold and cycle_result.static_analysis_passed and cycle_result.tests_passed):
                 report.success = True
                 report.total_cycles = cycle
                 break
@@ -159,7 +159,7 @@ class QAOrchestrator:
         report.tests_passed = report.cycles[-1].tests_passed if report.cycles else False
         report.total_cycles = len(report.cycles)
         report.duration = time.perf_counter() - started
-        report.success = report.final_quality_score >= self.quality_threshold or report.static_analysis_passed
+        report.success = (report.final_quality_score >= self.quality_threshold and report.static_analysis_passed and report.tests_passed)
 
         Logger.success(
             f"[QAOrchestrator] QA complete: {report.total_cycles} cycles, "

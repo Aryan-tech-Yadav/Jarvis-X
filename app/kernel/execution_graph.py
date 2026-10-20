@@ -101,6 +101,15 @@ class ExecutionGraph:
         )
         return [self.get_node(node_id) for node_id in ready_ids]
 
+    def is_completed(self, completed: Iterable[str] | None = None) -> bool:
+        """Return whether all graph nodes are present in the completed set.
+
+        Unknown node identifiers are rejected by the same validation used
+        by other graph operations.
+        """
+        done = self._completed_set(completed)
+        return done == set(self._nodes)
+
     def levels(self) -> list[list[str]]:
         """Return deterministic topological execution levels.
 

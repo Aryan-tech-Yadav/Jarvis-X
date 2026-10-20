@@ -12,10 +12,10 @@ class ToolManagerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = os.path.join(temp_dir, "demo.txt")
 
-            write_result = manager.execute("file", "write", path=file_path, content="hello tool")
+            write_result = manager.execute("file", "write", path=file_path, content="hello tool", workspace=temp_dir)
             self.assertTrue(write_result["success"], write_result)
 
-            read_result = manager.execute("file", "read", path=file_path)
+            read_result = manager.execute("file", "read", path=file_path, workspace=temp_dir)
             self.assertTrue(read_result["success"], read_result)
             self.assertEqual(read_result["output"], "hello tool")
 

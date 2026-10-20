@@ -64,6 +64,27 @@ class TestToolSystem(unittest.TestCase):
         self.assertFalse(self.policy.is_command_safe("rm -rf /"))
         self.assertTrue(self.policy.is_command_safe("pytest tests/"))
 
+    def test_terminal_handler_rejects_shell_operators(self):
+        result = self.executor.execute_tool(
+            "terminal", command="echo hello; whoami"
+        )
+        self.assertFalse(result.success)
+
+    def test_terminal_handler_rejects_destructive_commands(self):
+        result = self.executor.execute_tool("terminal", command="rm -rf /")
+        self.assertFalse(result.success)
+
+    def test_terminal_handler_marks_simulated_result(self):
+        result = self.executor.execute_tool("terminal", command="echo hello")
+        self.assertTrue(result.success)
+        self.assertTrue(result.data["simulated"])
+
+    def test_terminal_handler_rejects_unknown_command(self):
+        result = self.executor.execute_tool(
+            "terminal", command="unknown-command --help"
+        )
+        self.assertFalse(result.success)
+
     def test_tool_router_multi_step_pipeline(self):
         steps = [
             {"name": "create_dir", "tool": "filesystem", "kwargs": {"action": "write", "path": str(self.root / "init.py"), "content": "# Init"}},

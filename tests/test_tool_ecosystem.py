@@ -88,6 +88,78 @@ class TestToolRegistry(unittest.TestCase):
         self.assertFalse(result["success"])
         self.assertIn("not registered", result["error"])
 
+
+    def test_dangerous_tool_denied_without_permission_manager(self):
+        class DangerousTool(BaseTool):
+            metadata = ToolMetadata(
+                name="dangerous_test",
+                actions=["run"],
+                permissions=["terminal.sudo"],
+            )
+
+            def __init__(self):
+                super().__init__()
+                self.calls = 0
+
+            def run(self, action=None, **kwargs):
+                self.calls += 1
+                return {"success": True, "output": "executed"}
+
+        registry = ToolRegistry()
+        tool = DangerousTool()
+        registry.register(tool)
+
+        result = registry.execute("dangerous_test", "run")
+
+        self.assertFalse(result["success"])
+        self.assertIn("Permission manager unavailable", result["error"])
+        self.assertEqual(tool.calls, 0)
+
+    def test_dangerous_tool_denied_by_permission_manager(self):
+        from unittest.mock import Mock
+
+        class DangerousTool(BaseTool):
+            metadata = ToolMetadata(
+                name="dangerous_test",
+                actions=["run"],
+                permissions=["terminal.sudo"],
+            )
+
+            def __init__(self):
+                super().__init__()
+                self.calls = 0
+
+            def run(self, action=None, **kwargs):
+                self.calls += 1
+                return {"success": True, "output": "executed"}
+
+        manager = Mock()
+        manager.check.return_value.allowed = False
+        manager.check.return_value.reason = "Permission denied"
+
+        registry = ToolRegistry(permission_manager=manager)
+        tool = DangerousTool()
+        registry.register(tool)
+
+        result = registry.execute("dangerous_test", "run")
+
+        self.assertFalse(result["success"])
+        self.assertIn("Permission denied", result["error"])
+        self.assertEqual(tool.calls, 0)
+        manager.check.assert_called_once_with(
+            "dangerous_test", "run", ["terminal.sudo"]
+        )
+
+    def test_safe_tool_still_executes_without_permission_manager(self):
+        registry = ToolRegistry()
+        tool = FileSystemTool()
+        registry.register(tool)
+
+        # Preserve the existing registry's normal safe-tool behaviour.
+        result = registry.execute("filesystem", "list", context={"path": "."})
+
+        self.assertTrue(result.get("success", False))
+
     def test_search(self):
         registry = ToolRegistry()
         registry.register(GitTool())
@@ -215,10 +287,11 @@ class TestPermissionManager(unittest.TestCase):
         self.assertFalse(result.allowed)
         self.assertTrue(result.requires_approval)
 
-    def test_auto_approve(self):
+    def test_auto_approve_does_not_bypass_dangerous_permission(self):
         pm = PermissionManager(auto_approve=True)
         result = pm.check("terminal", "exec", ["terminal.sudo"])
-        self.assertTrue(result.allowed)
+        self.assertFalse(result.allowed)
+        self.assertTrue(result.requires_approval)
 
     def test_callback_approval(self):
         approved = []
@@ -348,13 +421,15 @@ class TestBuiltinTools(unittest.TestCase):
 
     def test_legacy_file_tool(self):
         tool = FileTool()
-        with tempfile.NamedTemporaryFile(delete=False) as f:
-            path = f.name
-        try:
-            result = tool.run("write", path=path, content="legacy")
+        with tempfile.TemporaryDirectory() as workspace:
+            path = os.path.join(workspace, "legacy.txt")
+            result = tool.run(
+                "write",
+                path=path,
+                content="legacy",
+                workspace=workspace,
+            )
             self.assertTrue(result["success"])
-        finally:
-            os.remove(path)
 
     def test_python_tool_run(self):
         tool = PythonTool()
@@ -390,3 +465,191 @@ class TestToolDiscovery(unittest.TestCase):
         self.assertIn("docker", names)
         self.assertIn("filesystem", names)
         self.assertIn("vscode", names)
+
+
+class TestGitDockerSecurity(unittest.TestCase):
+    def test_git_rejects_invalid_log_count(self):
+        tool = GitTool()
+        for count in ["1; rm -rf /", 0, 101, True, None]:
+            with self.subTest(count=count):
+                result = tool.run(action="log", count=count)
+                self.assertFalse(result["success"])
+
+    def test_git_rejects_empty_commit_message(self):
+        tool = GitTool()
+        result = tool.run(action="commit", message=" ")
+        self.assertFalse(result["success"])
+        self.assertIn("Commit message", result["error"])
+
+    def test_git_rejects_invalid_branch_name(self):
+        tool = GitTool()
+        result = tool.run(action="branch", name="-malicious")
+        self.assertFalse(result["success"])
+
+    def test_git_rejects_invalid_checkout_target(self):
+        tool = GitTool()
+        result = tool.run(action="checkout", branch="-f")
+        self.assertFalse(result["success"])
+
+    def test_docker_rejects_invalid_image(self):
+        tool = DockerTool()
+        result = tool.run(action="run", image="-malicious")
+        self.assertFalse(result["success"])
+
+    def test_docker_rejects_invalid_container(self):
+        tool = DockerTool()
+        for action in ("logs", "stop", "rm", "exec"):
+            with self.subTest(action=action):
+                result = tool.run(
+                    action=action,
+                    container="-malicious",
+                    command=["echo", "test"],
+                )
+                self.assertFalse(result["success"])
+
+    def test_docker_rejects_invalid_environment_key(self):
+        tool = DockerTool()
+        result = tool.run(
+            action="run",
+            image="python:3.12",
+            env={"BAD-KEY": "value"},
+        )
+        self.assertFalse(result["success"])
+
+
+class TestDockerExecutionSecurity(unittest.TestCase):
+    def test_invalid_image_never_executes_docker(self):
+        from unittest.mock import patch
+
+        tool = DockerTool()
+        with patch("app.tools.docker.subprocess.run") as mocked_run:
+            result = tool.run(action="run", image="-malicious")
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_invalid_environment_never_executes_docker(self):
+        from unittest.mock import patch
+
+        tool = DockerTool()
+        with patch("app.tools.docker.subprocess.run") as mocked_run:
+            result = tool.run(
+                action="run",
+                image="python:3.12",
+                env={"BAD-KEY": "value"},
+            )
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_invalid_container_never_executes_docker(self):
+        from unittest.mock import patch
+
+        tool = DockerTool()
+        with patch("app.tools.docker.subprocess.run") as mocked_run:
+            result = tool.run(action="stop", container="-malicious")
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_exec_preserves_quoted_arguments(self):
+        from unittest.mock import patch, Mock
+
+        tool = DockerTool()
+        fake_result = Mock(returncode=0, stdout="ok", stderr="")
+
+        with patch(
+            "app.tools.docker.subprocess.run",
+            return_value=fake_result,
+        ) as mocked_run:
+            result = tool.run(
+                action="exec",
+                container="test-container",
+                command='echo "hello world"',
+            )
+
+        self.assertTrue(result["success"])
+        actual_command = mocked_run.call_args.args[0]
+        self.assertEqual(
+            actual_command,
+            ["docker", "exec", "test-container", "echo", "hello world"],
+        )
+        self.assertIs(mocked_run.call_args.kwargs["shell"], False) if (
+            "shell" in mocked_run.call_args.kwargs
+        ) else self.assertNotIn("shell", mocked_run.call_args.kwargs)
+
+
+    def test_docker_exec_rejects_option_like_container(self):
+        from unittest.mock import patch
+        from app.tools.docker import DockerTool
+
+        tool = DockerTool()
+        with patch("app.tools.docker.subprocess.run") as mocked_run:
+            result = tool.run(
+                action="exec",
+                container="--help",
+                command=["echo", "test"],
+            )
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+class TestGitExecutionSecurity(unittest.TestCase):
+    def test_invalid_log_count_never_executes_git(self):
+        from unittest.mock import patch
+
+        tool = GitTool()
+
+        with patch("app.tools.git.subprocess.run") as mocked_run:
+            result = tool.run(action="log", count="1; rm -rf /")
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_invalid_branch_never_executes_git(self):
+        from unittest.mock import patch
+
+        tool = GitTool()
+
+        with patch("app.tools.git.subprocess.run") as mocked_run:
+            result = tool.run(action="branch", name="-malicious")
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_invalid_checkout_never_executes_git(self):
+        from unittest.mock import patch
+
+        tool = GitTool()
+
+        with patch("app.tools.git.subprocess.run") as mocked_run:
+            result = tool.run(action="checkout", branch="-f")
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_empty_commit_message_never_executes_git(self):
+        from unittest.mock import patch
+
+        tool = GitTool()
+
+        with patch("app.tools.git.subprocess.run") as mocked_run:
+            result = tool.run(action="commit", message=" ")
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
+
+    def test_git_clone_rejects_path_traversal(self):
+        from unittest.mock import patch
+        from app.tools.git import GitTool
+
+        tool = GitTool()
+        with patch("app.tools.git.subprocess.run") as mocked_run:
+            result = tool.run(
+                action="clone",
+                repo="https://example.com/repo.git",
+                destination="../outside",
+            )
+
+        self.assertFalse(result["success"])
+        mocked_run.assert_not_called()
